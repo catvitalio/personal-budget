@@ -18,3 +18,4 @@ services:
 
   db:
     image: postgres:12.4-alpine
+    env_file: .env
