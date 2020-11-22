@@ -1,0 +1,6 @@
+.vscode
+.devcontainer
+*.log
+*.pyc
+**/__pycache__/
+*.sql
