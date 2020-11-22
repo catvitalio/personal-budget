@@ -3,7 +3,7 @@ from rest_framework.viewsets import GenericViewSet, ViewSet
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 
-from apps.users.serializers import UserSerializer
+from users.serializers import UserSerializer
 
 
 class UserViewSet(CreateModelMixin, GenericViewSet):
