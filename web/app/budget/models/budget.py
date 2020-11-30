@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from model_utils import FieldTracker
 
 
 class BudgetType(models.Model):
@@ -61,7 +62,11 @@ class Expense(models.Model):
         ExpenseCategory,
         on_delete=models.CASCADE,
     )
-    Budget = models.ManyToManyField(Budget)
+    budget = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+    )
+    tracker = FieldTracker(fields=['value', 'budget'])
 
 
 class IncomeCategory(models.Model):
@@ -91,4 +96,8 @@ class Income(models.Model):
         IncomeCategory,
         on_delete=models.CASCADE,
     )
-    Budget = models.ManyToManyField(Budget)
+    budget = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+    )
+    tracker = FieldTracker(fields=['value', 'budget'])
