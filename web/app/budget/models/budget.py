@@ -8,6 +8,8 @@ class BudgetType(models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
@@ -40,6 +42,8 @@ class ExpenseCategory(models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
@@ -74,6 +78,8 @@ class IncomeCategory(models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):

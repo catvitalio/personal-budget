@@ -14,6 +14,7 @@ class BudgetTypeSerializer(ModelSerializer):
     class Meta:
         model = BudgetType
         fields = '__all__'
+        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class BudgetSerializer(ModelSerializer):
@@ -26,6 +27,7 @@ class ExpenseCategorySerializer(ModelSerializer):
     class Meta:
         model = ExpenseCategory
         fields = '__all__'
+        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class ExpenseSerializer(ModelSerializer):
@@ -38,6 +40,7 @@ class IncomeCategorySerializer(ModelSerializer):
     class Meta:
         model = IncomeCategory
         fields = '__all__'
+        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class IncomeSerializer(ModelSerializer):
