@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import {actionTypes} from '@/store/modules/auth'
+
 export default {
   name: 'AppRegister',
   data() {
@@ -54,7 +56,7 @@ export default {
     onSubmit() {
       console.log('onSubmit')
       this.$store
-        .dispatch('register', {
+        .dispatch(actionTypes.register, {
           username: this.username,
           password: this.password
         })
