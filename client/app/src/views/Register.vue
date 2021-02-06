@@ -4,6 +4,12 @@
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Регистрация</h1>
+
+          <app-validation-errors
+            v-if="validationErrors"
+            :validation-errors="validationErrors"
+          ></app-validation-errors>
+
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
@@ -24,7 +30,7 @@
             </fieldset>
 
             <button
-              class="btn btn-lg btn-primary pull-xs-right"
+              class="btn btn-lg btn-primary float-right"
               :disabled="isSubmitting"
             >
               Создать
@@ -37,10 +43,14 @@
 </template>
 
 <script>
+import AppValidationErrors from '@/components/ValidationErrors.vue'
 import {actionTypes} from '@/store/modules/auth'
 
 export default {
   name: 'AppRegister',
+  components: {
+    AppValidationErrors
+  },
   data() {
     return {
       username: '',
@@ -50,6 +60,9 @@ export default {
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors
     }
   },
   methods: {
