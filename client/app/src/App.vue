@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link :to="{name: 'home'}">Бюджет</router-link> |
-      <router-link :to="{name: 'register'}">Регистрация</router-link>
+      <router-link :to="{name: 'login'}">Войти</router-link>
     </div>
     <router-view />
   </div>
