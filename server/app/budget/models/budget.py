@@ -21,8 +21,7 @@ class Budget(models.Model):
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        blank=True,
-        null=True,
+        default=0.0
     )
     budget_type = models.ForeignKey(
         BudgetType,
@@ -70,6 +69,10 @@ class Expense(models.Model):
         Budget,
         on_delete=models.CASCADE,
     )
+    date = models.DateField(
+        blank=True,
+        null=True,
+    )
     tracker = FieldTracker(fields=['value', 'budget'])
 
 
@@ -106,4 +109,37 @@ class Income(models.Model):
         Budget,
         on_delete=models.CASCADE,
     )
+    date = models.DateField(
+        blank=True,
+        null=True,
+    )
     tracker = FieldTracker(fields=['value', 'budget'])
+
+
+class Transfer(models.Model):
+    name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    value = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
+    budget_from = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+        related_name='transfer_from',
+    )
+    budget_to = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+        related_name='transfer_to',
+    )
+    date = models.DateField(
+        blank=True,
+        null=True,
+    )
+    tracker = FieldTracker(fields=['value', 'budget_from', 'budget_to'])

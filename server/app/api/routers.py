@@ -8,6 +8,7 @@ from budget.viewsets import (
     ExpenseViewSet,
     IncomeCategoryViewSet,
     IncomeViewSet,
+    TransferViewSet
 )
 
 
@@ -20,3 +21,4 @@ router.register('expense', ExpenseViewSet, basename='expenses')
 router.register('expense_category', ExpenseCategoryViewSet, basename='expense_categories')
 router.register('income', IncomeViewSet, basename='income')
 router.register('income_category', IncomeCategoryViewSet, basename='income_categories')
+router.register('transfer', TransferViewSet, basename='transfers')

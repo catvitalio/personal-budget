@@ -7,6 +7,7 @@ from budget.models import (
     Expense,
     IncomeCategory,
     Income,
+    Transfer
 )
 
 
@@ -37,4 +38,9 @@ class IncomeCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Income)
 class IncomeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Transfer)
+class TransferAdmin(admin.ModelAdmin):
     pass

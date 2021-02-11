@@ -7,6 +7,7 @@ from budget.models import (
     Expense,
     IncomeCategory,
     Income,
+    Transfer,
 )
 
 
@@ -46,4 +47,10 @@ class IncomeCategorySerializer(ModelSerializer):
 class IncomeSerializer(ModelSerializer):
     class Meta:
         model = Income
+        fields = '__all__'
+
+
+class TransferSerializer(ModelSerializer):
+    class Meta:
+        model = Transfer
         fields = '__all__'

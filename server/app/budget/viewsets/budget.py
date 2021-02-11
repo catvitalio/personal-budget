@@ -8,6 +8,7 @@ from budget.serializers import (
     ExpenseSerializer,
     IncomeCategorySerializer,
     IncomeSerializer,
+    TransferSerializer,
 )
 from budget.models import (
     BudgetType,
@@ -16,8 +17,13 @@ from budget.models import (
     Expense,
     IncomeCategory,
     Income,
+    Transfer,
 )
-from budget.permissions import ObjectCreatorPermission, BudgetCreatorPermission
+from budget.permissions import (
+    ObjectCreatorPermission, 
+    BudgetCreatorPermission,
+    TransferCreatorPermission,
+)
 
 
 class BudgetTypeViewSet(ModelViewSet):
@@ -26,8 +32,7 @@ class BudgetTypeViewSet(ModelViewSet):
 
     def get_queryset(self):
         return BudgetType.objects.filter(
-                Q(creator=self.request.user) | Q(creator=None)
-        )
+            Q(creator=self.request.user) | Q(creator=None))
 
 
 class BudgetViewSet(ModelViewSet):
@@ -36,8 +41,7 @@ class BudgetViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Budget.objects.filter(
-                Q(creator=self.request.user) | Q(creator=None)
-        )
+            Q(creator=self.request.user) | Q(creator=None))
 
 
 class ExpenseCategoryViewSet(ModelViewSet):
@@ -46,8 +50,7 @@ class ExpenseCategoryViewSet(ModelViewSet):
 
     def get_queryset(self):
         return ExpenseCategory.objects.filter(
-                Q(creator=self.request.user) | Q(creator=None)
-        )
+            Q(creator=self.request.user) | Q(creator=None))
 
 
 class ExpenseViewSet(ModelViewSet):
@@ -56,8 +59,7 @@ class ExpenseViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Expense.objects.filter(
-                Q(budget__creator=self.request.user) | Q(budget__creator=None)
-        )
+            Q(budget__creator=self.request.user) | Q(budget__creator=None))
 
 
 class IncomeCategoryViewSet(ModelViewSet):
@@ -66,16 +68,23 @@ class IncomeCategoryViewSet(ModelViewSet):
 
     def get_queryset(self):
         return IncomeCategory.objects.filter(
-                Q(creator=self.request.user) | Q(creator=None)
-        )
+            Q(creator=self.request.user) | Q(creator=None))
 
 
 class IncomeViewSet(ModelViewSet):
-    queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [BudgetCreatorPermission]
 
     def get_queryset(self):
         return Income.objects.filter(
-                Q(budget__creator=self.request.user) | Q(budget__creator=None)
-        )
+            Q(budget__creator=self.request.user) | Q(budget__creator=None))
+
+
+class TransferViewSet(ModelViewSet):
+    serializer_class = TransferSerializer
+    permission_classes = [TransferCreatorPermission]
+
+    def get_queryset(self):
+        return Transfer.objects.filter(
+                Q(budget_from__creator=self.request.user) | 
+                Q(budget_to__creator=self.request.user))
