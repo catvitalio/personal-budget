@@ -20,6 +20,6 @@ def include_income(sender, instance, created, **kwargs):
                 prev_budget.value -= instance.value
             prev_budget.save()
             budget.value += instance.value
-        else:
+        elif 'value' in fields.changed():
             budget.value += instance.value - fields.changed()['value']
     budget.save()
