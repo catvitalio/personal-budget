@@ -11,15 +11,15 @@ def include_income(sender, instance, created, **kwargs):
     if created:
         budget.value += instance.value
     if not created:
-        fields = instance.tracker
-        if 'budget' in fields.changed():
-            prev_budget = Budget.objects.get(id=fields.changed()['budget'])
-            if 'value' in fields.changed():
-                prev_budget.value -= fields.changed()['value']
+        changed = instance.tracker.changed()
+        if 'budget' in changed:
+            prev_budget = Budget.objects.get(id=changed['budget'])
+            if 'value' in changed:
+                prev_budget.value -= changed['value']
             else:
                 prev_budget.value -= instance.value
             prev_budget.save()
             budget.value += instance.value
-        elif 'value' in fields.changed():
-            budget.value += instance.value - fields.changed()['value']
+        elif 'value' in changed:
+            budget.value += instance.value - changed['value']
     budget.save()
