@@ -1,4 +1,7 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import CurrentUserDefault
+from rest_framework.serializers import PrimaryKeyRelatedField
+from django.contrib.auth.models import User
 
 from budget.models import (
     BudgetType,
@@ -12,23 +15,36 @@ from budget.models import (
 
 
 class BudgetTypeSerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
     class Meta:
         model = BudgetType
         fields = '__all__'
-        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class BudgetSerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
     class Meta:
         model = Budget
         fields = '__all__'
 
 
 class ExpenseCategorySerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
     class Meta:
         model = ExpenseCategory
         fields = '__all__'
-        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class ExpenseSerializer(ModelSerializer):
@@ -38,10 +54,14 @@ class ExpenseSerializer(ModelSerializer):
 
 
 class IncomeCategorySerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
     class Meta:
         model = IncomeCategory
         fields = '__all__'
-        extra_kwargs = {'creator': {'allow_null': False}}
 
 
 class IncomeSerializer(ModelSerializer):
