@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework.serializers import CurrentUserDefault
 from rest_framework.serializers import PrimaryKeyRelatedField
+from rest_framework.serializers import ValidationError
 from django.contrib.auth.models import User
 
 from budget.models import (
@@ -48,6 +49,12 @@ class ExpenseCategorySerializer(ModelSerializer):
 
 
 class ExpenseSerializer(ModelSerializer):
+    def validate(self, data):
+        if data['value'] > data['budget'].value:
+            raise ValidationError({
+                'value': 'Недостаточно средств в единице бюджета'
+            })
+
     class Meta:
         model = Expense
         fields = '__all__'
@@ -71,6 +78,12 @@ class IncomeSerializer(ModelSerializer):
 
 
 class TransferSerializer(ModelSerializer):
+    def validate(self, data):
+        if data['value'] > data['budget_from'].value:
+            raise ValidationError({
+                'value': 'Недостаточно средств в единице бюджета (отправитель)'
+            })
+
     class Meta:
         model = Transfer
         fields = '__all__'
