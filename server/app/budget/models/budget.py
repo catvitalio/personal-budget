@@ -58,8 +58,7 @@ class Expense(models.Model):
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        blank=True,
-        null=True,
+        default=0.0,
     )
     category = models.ForeignKey(
         ExpenseCategory,
@@ -98,8 +97,7 @@ class Income(models.Model):
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        blank=True,
-        null=True,
+        default=0.0,
     )
     category = models.ForeignKey(
         IncomeCategory,
@@ -125,8 +123,7 @@ class Transfer(models.Model):
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        blank=True,
-        null=True,
+        default=0.0,
     )
     budget_from = models.ForeignKey(
         Budget,
