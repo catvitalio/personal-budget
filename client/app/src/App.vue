@@ -1,32 +1,17 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link :to="{name: 'home'}">Бюджет</router-link> |
-      <router-link :to="{name: 'login'}">Войти</router-link>
-    </div>
+  <div>
+    <app-topbar />
     <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import AppTopbar from '@/components/Topbar'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'App',
+  components: {
+    AppTopbar
+  }
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #007bff;
-}
-</style>
+</script>
