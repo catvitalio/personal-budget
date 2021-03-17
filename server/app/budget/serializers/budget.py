@@ -31,6 +31,7 @@ class BudgetSerializer(ModelSerializer):
         queryset=User.objects.all(),
         default=CurrentUserDefault()
     )
+    budget_type = BudgetTypeSerializer(read_only=True)
 
     class Meta:
         model = Budget
@@ -49,6 +50,9 @@ class ExpenseCategorySerializer(ModelSerializer):
 
 
 class ExpenseSerializer(ModelSerializer):
+    category = ExpenseCategorySerializer(read_only=True)
+    budget = BudgetSerializer(read_only=True)
+
     def validate(self, data):
         if data['value'] > data['budget'].value:
             raise ValidationError({
@@ -72,12 +76,18 @@ class IncomeCategorySerializer(ModelSerializer):
 
 
 class IncomeSerializer(ModelSerializer):
+    category = IncomeCategorySerializer(read_only=True)
+    budget = BudgetSerializer(read_only=True)
+
     class Meta:
         model = Income
         fields = '__all__'
 
 
 class TransferSerializer(ModelSerializer):
+    budget_from = BudgetSerializer(read_only=True)
+    budget_to = BudgetSerializer(read_only=True)
+
     def validate(self, data):
         if data['value'] > data['budget_from'].value:
             raise ValidationError({
