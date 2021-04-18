@@ -1,5 +1,7 @@
 from rest_framework import permissions
 
+from budget.models import Budget
+
 
 class ObjectCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -15,7 +17,14 @@ class ObjectCreatorPermission(permissions.BasePermission):
 
 class BudgetCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated
+        if 'budget' in request.data:
+            budget = Budget.objects.get(pk=request.data['budget'])
+            return (
+                request.user.is_authenticated and
+                budget.creator == request.user
+            )
+        else:
+            return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
         return (
@@ -27,7 +36,17 @@ class BudgetCreatorPermission(permissions.BasePermission):
 
 class TransferCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.is_authenticated
+        if 'budget_to' in request.data or 'budget_from' in request.data:
+            budget_to = Budget.objects.get(pk=request.data['budget_to'])
+            budget_from = Budget.objects.get(pk=request.data['budget_from'])
+            return (
+                request.user.is_authenticated and
+                budget_to.creator == request.user and
+                budget_from.creator == request.user
+            )
+
+        else:
+            return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
         return (
