@@ -4,11 +4,15 @@ from django.db.models import Q
 from budget.serializers import (
     BudgetTypeSerializer,
     BudgetSerializer,
+    BudgetDetailSerializer,
     ExpenseCategorySerializer,
     ExpenseSerializer,
+    ExpenseDetailSerializer,
     IncomeCategorySerializer,
     IncomeSerializer,
+    IncomeDetailSerializer,
     TransferSerializer,
+    TransferDetailSerializer
 )
 from budget.models import (
     BudgetType,
@@ -36,12 +40,17 @@ class BudgetTypeViewSet(ModelViewSet):
 
 
 class BudgetViewSet(ModelViewSet):
-    serializer_class = BudgetSerializer
     permission_classes = [ObjectCreatorPermission]
 
     def get_queryset(self):
         return Budget.objects.filter(
             Q(creator=self.request.user) | Q(creator=None))
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return BudgetDetailSerializer
+        else:
+            return BudgetSerializer
 
 
 class ExpenseCategoryViewSet(ModelViewSet):
@@ -54,12 +63,17 @@ class ExpenseCategoryViewSet(ModelViewSet):
 
 
 class ExpenseViewSet(ModelViewSet):
-    serializer_class = ExpenseSerializer
     permission_classes = [BudgetCreatorPermission]
 
     def get_queryset(self):
         return Expense.objects.filter(
             Q(budget__creator=self.request.user) | Q(budget__creator=None))
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return ExpenseDetailSerializer
+        else:
+            return ExpenseSerializer
 
 
 class IncomeCategoryViewSet(ModelViewSet):
@@ -72,19 +86,29 @@ class IncomeCategoryViewSet(ModelViewSet):
 
 
 class IncomeViewSet(ModelViewSet):
-    serializer_class = IncomeSerializer
     permission_classes = [BudgetCreatorPermission]
 
     def get_queryset(self):
         return Income.objects.filter(
             Q(budget__creator=self.request.user) | Q(budget__creator=None))
 
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return IncomeDetailSerializer
+        else:
+            return IncomeSerializer
+
 
 class TransferViewSet(ModelViewSet):
-    serializer_class = TransferSerializer
     permission_classes = [TransferCreatorPermission]
 
     def get_queryset(self):
         return Transfer.objects.filter(
                 Q(budget_from__creator=self.request.user) | 
                 Q(budget_to__creator=self.request.user))
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return TransferDetailSerializer
+        else:
+            return TransferSerializer
