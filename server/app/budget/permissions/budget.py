@@ -17,7 +17,10 @@ class ObjectCreatorPermission(permissions.BasePermission):
 
 class BudgetCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        if 'budget' in request.data:
+        if (
+            'budget' in request.data and
+            Budget.objects.filter(pk=request.data['budget']).exists()
+        ):
             budget = Budget.objects.get(pk=request.data['budget'])
             return (
                 request.user.is_authenticated and
@@ -36,7 +39,12 @@ class BudgetCreatorPermission(permissions.BasePermission):
 
 class TransferCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        if 'budget_to' in request.data or 'budget_from' in request.data:
+        if (
+            'budget_to' in request.data or
+            'budget_from' in request.data and
+            Budget.objects.filter(pk=request.data['budget_to']).exists() or
+            Budget.objects.filter(pk=request.data['budget_from']).exists()
+        ):
             budget_to = Budget.objects.get(pk=request.data['budget_to'])
             budget_from = Budget.objects.get(pk=request.data['budget_from'])
             return (
@@ -44,7 +52,6 @@ class TransferCreatorPermission(permissions.BasePermission):
                 budget_to.creator == request.user and
                 budget_from.creator == request.user
             )
-
         else:
             return request.user.is_authenticated
 
