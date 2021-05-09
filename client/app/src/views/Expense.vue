@@ -23,8 +23,8 @@
               <b-link :to="{name: 'editExpense', params: {slug: expense.id}}"
                 ><b-button variant="dark">Изменить</b-button></b-link
               >
-              <b-link :to="{name: 'deleteExpense', params: {slug: expense.id}}"
-                ><b-button variant="danger ml-1">Удалить</b-button></b-link
+              <b-button @click="deleteExpense" variant="danger ml-1"
+                >Удалить</b-button
               >
             </b-card>
           </div>
@@ -51,6 +51,17 @@ export default {
     this.$store.dispatch(actionTypes.getExpense, {
       slug: this.$route.params.slug
     })
+  },
+  methods: {
+    deleteExpense() {
+      this.$store
+        .dispatch(actionTypes.deleteExpense, {
+          slug: this.$route.params.slug
+        })
+        .then(() => {
+          this.$router.push({name: 'expensesList'})
+        })
+    }
   }
 }
 </script>

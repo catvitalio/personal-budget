@@ -4,6 +4,11 @@ const getExpense = slug => {
   return axios.get(`/expense/${slug}/`)
 }
 
+const deleteExpense = slug => {
+  return axios.delete(`/expense/${slug}/`)
+}
+
 export default {
-  getExpense
+  getExpense,
+  deleteExpense
 }

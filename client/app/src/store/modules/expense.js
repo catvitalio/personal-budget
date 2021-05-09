@@ -9,11 +9,16 @@ const state = {
 export const mutationTypes = {
   getExpenseStart: '[expense] Get expense start',
   getExpenseSuccess: '[expense] Get expense success',
-  getExpenseFailure: '[expenese] Get expense failure'
+  getExpenseFailure: '[expenese] Get expense failure',
+
+  deleteExpenseStart: '[expense] Delete expense start',
+  deleteExpenseSuccess: '[expense] Delete expense success',
+  deleteExpenseFailure: '[expenese] Delete expense failure'
 }
 
 export const actionTypes = {
-  getExpense: '[expense] Get expense'
+  getExpense: '[expense] Get expense',
+  deleteExpense: '[expense] Delete expense'
 }
 
 const mutations = {
@@ -27,7 +32,10 @@ const mutations = {
   },
   [mutationTypes.getExpenseFailure](state) {
     state.isLoading = false
-  }
+  },
+  [mutationTypes.deleteExpenseStart]() {},
+  [mutationTypes.deleteExpenseSuccess]() {},
+  [mutationTypes.deleteExpenseFailure]() {}
 }
 
 const actions = {
@@ -42,6 +50,20 @@ const actions = {
         })
         .catch(() => {
           context.commit(mutationTypes.getExpenseFailure)
+        })
+    })
+  },
+  [actionTypes.deleteExpense](context, {slug}) {
+    return new Promise(resolve => {
+      context.commit(mutationTypes.deleteExpenseStart, slug)
+      expenseApi
+        .deleteExpense(slug)
+        .then(() => {
+          context.commit(mutationTypes.deleteExpenseSuccess)
+          resolve()
+        })
+        .catch(() => {
+          context.commit(mutationTypes.deleteExpenseFailure)
         })
     })
   }
