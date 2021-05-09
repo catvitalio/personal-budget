@@ -19,7 +19,7 @@
 
       <template v-if="isLoggedIn">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'expenses'}">
+          <router-link class="nav-link" :to="{name: 'expensesList'}">
             Расходы
           </router-link>
         </li>

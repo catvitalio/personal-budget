@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import auth from '@/store/modules/auth'
-import expenses from '@/store/modules/expenses'
+import expense from '@/store/modules/expense'
+import expensesList from '@/store/modules/expensesList'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     auth,
-    expenses
+    expense,
+    expensesList
   }
 })

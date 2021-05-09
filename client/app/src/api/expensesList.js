@@ -1,9 +1,9 @@
 import axios from '@/api/axios'
 
-const getExpenses = () => {
+const getExpensesList = () => {
   return axios.get('/expense/')
 }
 
 export default {
-  getExpenses
+  getExpensesList
 }

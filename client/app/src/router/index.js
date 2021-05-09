@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
-import Expenses from '@/views/Expenses'
+import Expense from '@/views/Expense'
+import ExpensesList from '@/views/ExpensesList'
 
 Vue.use(VueRouter)
 
@@ -24,9 +25,14 @@ const routes = [
     component: Login
   },
   {
+    path: '/expenses/:slug',
+    name: 'expense',
+    component: Expense
+  },
+  {
     path: '/expenses',
-    name: 'expenses',
-    component: Expenses
+    name: 'expensesList',
+    component: ExpensesList
   }
 ]
 
