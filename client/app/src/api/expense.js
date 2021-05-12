@@ -8,7 +8,22 @@ const deleteExpense = slug => {
   return axios.delete(`/expense/${slug}/`)
 }
 
+const createExpense = expenseInput => {
+  return axios.post('/expense/', expenseInput).then(response => response.data)
+}
+
+const getBudgetsList = () => {
+  return axios.get('/budget/')
+}
+
+const getCategoriesList = () => {
+  return axios.get('/expense_category/')
+}
+
 export default {
   getExpense,
-  deleteExpense
+  deleteExpense,
+  createExpense,
+  getBudgetsList,
+  getCategoriesList
 }

@@ -4,6 +4,7 @@ import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
 import Expense from '@/views/Expense'
+import CreateExpense from '@/views/CreateExpense'
 import ExpensesList from '@/views/ExpensesList'
 
 Vue.use(VueRouter)
@@ -23,6 +24,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/expenses/new',
+    name: 'createExpense',
+    component: CreateExpense
   },
   {
     path: '/expenses/:slug',

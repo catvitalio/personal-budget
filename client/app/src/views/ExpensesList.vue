@@ -8,21 +8,13 @@
     <div v-if="expenses">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <b-button
-            pill
-            variant="outline-dark mt-4 mb-3"
-            v-if="createForm"
-            @click="createForm = false"
-            >✕</b-button
-          >
-          <button
+          <router-link
             type="button"
             class="btn btn-dark btn-block mt-4 mb-2"
-            v-if="!createForm"
-            @click="createForm = true"
+            :to="{name: 'createExpense'}"
           >
             +
-          </button>
+          </router-link>
 
           <div class="list-group">
             <div
