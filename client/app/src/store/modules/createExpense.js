@@ -35,8 +35,8 @@ const actions = {
       expenseApi
         .createExpense(expenseInput)
         .then(expense => {
-          context.commit(mutationTypes.createExpenseSuccess, expense)
-          resolve(expense)
+          context.commit(mutationTypes.createExpenseSuccess, expense.data)
+          resolve(expense.data)
         })
         .catch(result => {
           context.commit(

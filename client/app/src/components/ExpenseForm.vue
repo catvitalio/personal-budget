@@ -56,7 +56,7 @@
                   class="btn btn-lg pull-xs-right btn-dark"
                   :disabled="isSubmitting"
                 >
-                  Создать
+                  Добавить
                 </button>
               </fieldset>
             </fieldset>
@@ -92,10 +92,10 @@ export default {
   },
   data() {
     return {
-      budget: '',
-      value: '',
-      date: '',
-      category: '',
+      budget: this.initialValues.budget,
+      value: this.initialValues.value,
+      date: this.initialValues.date,
+      category: this.initialValues.category,
 
       budgetsList: [],
       categoriesList: []

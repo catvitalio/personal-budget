@@ -12,6 +12,12 @@ const createExpense = expenseInput => {
   return axios.post('/expense/', expenseInput).then(response => response.data)
 }
 
+const editExpense = (slug, expenseInput) => {
+  return axios
+    .put(`/expense/${slug}/`, expenseInput)
+    .then(response => response.data)
+}
+
 const getBudgetsList = () => {
   return axios.get('/budget/')
 }
@@ -24,6 +30,7 @@ export default {
   getExpense,
   deleteExpense,
   createExpense,
+  editExpense,
   getBudgetsList,
   getCategoriesList
 }
