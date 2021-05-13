@@ -19,7 +19,7 @@
           <div class="list-group">
             <div
               class="expenses-preview"
-              v-for="expense in expenses.results"
+              v-for="expense in expenses"
               :key="expense"
             >
               <router-link
@@ -54,7 +54,7 @@ export default {
   computed: {
     ...mapState({
       isLoading: state => state.expensesList.isLoading,
-      expenses: state => state.expensesList.data,
+      expenses: state => state.expensesList.data.results.reverse(),
       error: state => state.expensesList.error
     })
   },
