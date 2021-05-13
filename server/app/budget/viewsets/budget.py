@@ -31,6 +31,7 @@ from budget.permissions import (
 
 
 class BudgetTypeViewSet(ModelViewSet):
+    pagination_class = None
     serializer_class = BudgetTypeSerializer
     permission_classes = [ObjectCreatorPermission]
 
@@ -40,6 +41,7 @@ class BudgetTypeViewSet(ModelViewSet):
 
 
 class BudgetViewSet(ModelViewSet):
+    pagination_class = None
     permission_classes = [ObjectCreatorPermission]
 
     def get_queryset(self):
@@ -54,6 +56,7 @@ class BudgetViewSet(ModelViewSet):
 
 
 class ExpenseCategoryViewSet(ModelViewSet):
+    pagination_class = None
     serializer_class = ExpenseCategorySerializer
     permission_classes = [ObjectCreatorPermission]
 
@@ -77,6 +80,7 @@ class ExpenseViewSet(ModelViewSet):
 
 
 class IncomeCategoryViewSet(ModelViewSet):
+    pagination_class = None
     serializer_class = IncomeCategorySerializer
     permission_classes = [ObjectCreatorPermission]
 

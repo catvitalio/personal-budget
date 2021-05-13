@@ -103,10 +103,10 @@ export default {
   },
   mounted() {
     expenseApi.getBudgetsList().then(response => {
-      this.budgetsList = response.data.results
+      this.budgetsList = response.data
     })
     expenseApi.getCategoriesList().then(response => {
-      this.categoriesList = response.data.results
+      this.categoriesList = response.data
     })
   },
   methods: {
