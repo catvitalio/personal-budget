@@ -63,6 +63,7 @@ class ExpenseSerializer(ModelSerializer):
     class Meta:
         model = Expense
         fields = '__all__'
+        extra_kwargs = {'date': {'required': True}, 'value': {'required': True}}
 
 
 class ExpenseDetailSerializer(ExpenseSerializer, ExpenseSerializer.Meta):
@@ -85,6 +86,7 @@ class IncomeSerializer(ModelSerializer):
     class Meta:
         model = Income
         fields = '__all__'
+        extra_kwargs = {'date': {'required': True}, 'value': {'required': True}}
 
 
 class IncomeDetailSerializer(IncomeSerializer, IncomeSerializer.Meta):
@@ -103,6 +105,7 @@ class TransferSerializer(ModelSerializer):
     class Meta:
         model = Transfer
         fields = '__all__'
+        extra_kwargs = {'date': {'required': True}, 'value': {'required': True}}
 
 
 class TransferDetailSerializer(TransferSerializer, TransferSerializer.Meta):
