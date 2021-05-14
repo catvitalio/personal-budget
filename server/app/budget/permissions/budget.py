@@ -40,9 +40,9 @@ class BudgetCreatorPermission(permissions.BasePermission):
 class TransferCreatorPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if (
-            'budget_to' in request.data or
+            'budget_to' in request.data and
             'budget_from' in request.data and
-            Budget.objects.filter(pk=request.data['budget_to']).exists() or
+            Budget.objects.filter(pk=request.data['budget_to']).exists() and
             Budget.objects.filter(pk=request.data['budget_from']).exists()
         ):
             budget_to = Budget.objects.get(pk=request.data['budget_to'])
