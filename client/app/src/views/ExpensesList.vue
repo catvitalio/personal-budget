@@ -54,7 +54,7 @@ export default {
   computed: {
     ...mapState({
       isLoading: state => state.expensesList.isLoading,
-      expenses: state => state.expensesList.data.results.reverse(),
+      expenses: state => state.expensesList.data.results,
       error: state => state.expensesList.error
     })
   },
