@@ -3,14 +3,14 @@
     <ul class="arrows-pagination">
       <li>
         <a href="#" @click="prevPage"
-          ><span class="pagination" :class="{active: hasPrevPage}"
+          ><span class="pagination-item" :class="{active: hasPrevPage}"
             >← сюда
           </span></a
         >
       </li>
       <li>
         <a href="#" @click="nextPage"
-          ><span class="pagination" :class="{active: hasNextPage}">
+          ><span class="pagination-item" :class="{active: hasNextPage}">
             туда →</span
           ></a
         >
@@ -20,7 +20,7 @@
       <li v-for="page in pages" :key="page">
         <a href="#" @click="changePage(page)"
           ><span
-            class="pagination"
+            class="pagination-item"
             :class="{
               active: currentPage === page,
               first: page === pages[0] && Math.abs(page - currentPage) > 3,
@@ -89,30 +89,28 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .arrows-pagination {
   list-style: none;
-  margin: auto;
-  width: 50%;
   text-align: center;
+  margin: auto;
+  li {
+    display: inline-block;
+    padding: 3px;
+    a {
+      text-decoration: none;
+    }
+  }
 }
 
-.arrows-pagination > li {
-  display: inline-block;
-  padding: 3px;
-}
-
-.pagination {
-  font-size: 26px;
-  font-weight: 500;
-  color: black;
-  white-space: nowrap;
-  display: inline-block;
-  position: relative;
+.pagination-item {
+  font-size: $--font-size-subtitle;
+  font-weight: $--font-weight-medium;
+  color: $--text;
 }
 
 .active {
-  color: green;
+  color: $--primary;
 }
 
 span.first::after,
