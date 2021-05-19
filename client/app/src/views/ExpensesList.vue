@@ -39,6 +39,12 @@
               </router-link>
             </div>
           </div>
+          <app-pagination
+            :hasNextPage="hasNextPage"
+            :hasPrevPage="hasPrevPage"
+            :total="total"
+            @currentPage="fetchExpenses"
+          />
         </div>
       </div>
     </div>
@@ -48,27 +54,39 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/expensesList'
+import AppPagination from '@/components/Pagination'
 
 export default {
   name: 'AppExpensesList',
+  components: {
+    AppPagination
+  },
+  data() {
+    return {
+      startPage: 1
+    }
+  },
   computed: {
     ...mapState({
       isLoading: state => state.expensesList.isLoading,
       expenses: state => state.expensesList.data.results,
-      error: state => state.expensesList.error
+      error: state => state.expensesList.error,
+      total: state => state.expensesList.data.count,
+      hasNextPage: state => Boolean(state.expensesList.data.next),
+      hasPrevPage: state => Boolean(state.expensesList.data.previous)
     })
   },
   watch: {
     currentPage() {
-      this.fetchExpenses()
+      this.fetchExpenses(this.startPage)
     }
   },
   mounted() {
-    this.fetchExpenses()
+    this.fetchExpenses(this.startPage)
   },
   methods: {
-    fetchExpenses() {
-      this.$store.dispatch(actionTypes.getExpensesList)
+    fetchExpenses(pageNumber) {
+      this.$store.dispatch(actionTypes.getExpensesList, pageNumber)
     }
   }
 }
