@@ -1,39 +1,44 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light">
-    <router-link class="navbar-brand mb-0 h1" :to="{name: 'home'}">
-      Personal Budget
-    </router-link>
-
-    <ul class="nav navbar-nav ml-auto">
-      <template v-if="isAnonymous">
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            :to="{name: 'login'}"
-            active-class="active"
-          >
-            Войти
-          </router-link>
-        </li>
-      </template>
-
-      <template v-if="isLoggedIn">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'expensesList'}">
-            Расходы
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'home'}">
-            Доходы
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'home'}">
-            {{ currentUser.username }}
-          </router-link>
-        </li>
-      </template>
+  <nav>
+    <ul class="navbar">
+      <li>
+        <router-link :to="{name: 'home'}">PB</router-link>
+      </li>
+      <li v-if="isLoggedIn">
+        <router-link :to="{name: 'sourcesList'}" active-class="active"
+          >СЧЕТА</router-link
+        >
+      </li>
+      <li v-if="isLoggedIn">
+        <router-link :to="{name: 'expensesList'}" active-class="active"
+          >РАСХОДЫ</router-link
+        >
+      </li>
+      <li v-if="isLoggedIn">
+        <router-link :to="{name: 'incomesList'}" active-class="active"
+          >ДОХОДЫ</router-link
+        >
+      </li>
+      <li v-if="isLoggedIn">
+        <router-link :to="{name: 'transfersList'}" active-class="active"
+          >ПЕРЕВОДЫ</router-link
+        >
+      </li>
+      <li v-if="isAnonymous">
+        <router-link :to="{name: 'login'}" active-class="active"
+          >Войти</router-link
+        >
+      </li>
+      <li v-if="isAnonymous">
+        <router-link :to="{name: 'register'}" active-class="active"
+          >Зарегистрироваться</router-link
+        >
+      </li>
+      <li>
+        <router-link class="nav-link" :to="{name: 'home'}">
+          {{ currentUser.username }}
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -53,3 +58,30 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+nav {
+  font-size: $--font-size-small;
+  font-weight: $--font-weight-medium;
+  top: 0;
+  width: 100%;
+  a {
+    color: $--text;
+    text-decoration: none;
+  }
+}
+
+.navbar {
+  list-style: none;
+  width: 300px;
+  margin: auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.active {
+  color: $--primary;
+}
+</style>

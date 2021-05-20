@@ -45,6 +45,18 @@ const routes = [
     path: '/expenses',
     name: 'expensesList',
     component: ExpensesList
+  },
+  {
+    path: '/incomes',
+    name: 'incomesList'
+  },
+  {
+    path: '/sources',
+    name: 'sourcesList'
+  },
+  {
+    path: '/transfers',
+    name: 'transfersList'
   }
 ]
 
