@@ -34,7 +34,7 @@
           >Зарегистрироваться</router-link
         >
       </li>
-      <li>
+      <li v-if="isLoggedIn">
         <router-link class="nav-link" :to="{name: 'home'}">
           {{ currentUser.username }}
         </router-link>
@@ -61,27 +61,33 @@ export default {
 
 <style lang="scss">
 nav {
-  font-size: $--font-size-small;
+  font-size: $--font-size-base;
   font-weight: $--font-weight-medium;
   top: 0;
   width: 100%;
   a {
     color: $--text;
     text-decoration: none;
+    transition: $--transition;
+    .active {
+      color: $--primary;
+    }
+    &:hover {
+      color: $--secondary;
+      transition: $--transition;
+    }
   }
 }
 
 .navbar {
   list-style: none;
-  width: 300px;
-  margin: auto;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 20px;
+  padding: 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-}
-
-.active {
-  color: $--primary;
 }
 </style>

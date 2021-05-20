@@ -94,6 +94,7 @@ export default {
   list-style: none;
   text-align: center;
   margin: auto;
+  padding: 0;
   li {
     display: inline-block;
     padding: 3px;
@@ -107,6 +108,11 @@ export default {
   font-size: $--font-size-subtitle;
   font-weight: $--font-weight-medium;
   color: $--text;
+  transition: $--transition;
+  &:hover {
+    color: $--secondary;
+    transition: $--transition;
+  }
 }
 
 .active {
