@@ -20,13 +20,14 @@
                 <h3>{{ expense.date }}</h3>
                 <h1>{{ expense.category.name }}</h1>
                 <h2>{{ expense.value }}</h2>
-                <p>{{ expense.budget.name }}</p>
+                <p>{{ expense.budget.name | truncate(6, '...') }}</p>
               </div>
             </router-link>
           </div>
         </div>
       </div>
       <app-pagination
+        v-if="total > 5"
         :hasNextPage="hasNextPage"
         :hasPrevPage="hasPrevPage"
         :total="total"
