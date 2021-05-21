@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-exit-button />
+    <app-exit-button :link="{name: 'expensesList'}" />
     <app-expense-form
       :initial-values="initialValues"
       :errors="validationErrors"

@@ -1,14 +1,18 @@
 <template>
   <div class="page">
-    <router-link :to="{name: 'expensesList'}"
-      ><button class="exit-button">✕</button></router-link
-    >
+    <router-link :to="link"><button class="exit-button">✕</button></router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppExitButton'
+  name: 'AppExitButton',
+  props: {
+    link: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

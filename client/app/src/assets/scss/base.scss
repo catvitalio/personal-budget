@@ -95,6 +95,7 @@ select {
   color: $--text;
   font-size: $--font-size-base;
   font-weight: $--font-weight-medium;
+  font-family: $--font-family;
   transition: $--transition;
   outline: none;
   &:focus {
@@ -106,6 +107,7 @@ select {
 .form-button {
   font-size: $--font-size-base;
   font-weight: $--font-weight-bold;
+  font-family: $--font-family;
   display: block;
   width: 100%;
   height: 40px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Edit Expense
+    <app-exit-button :link="{name: 'expense', params: {slug: expense.id}}" />
     <app-expense-form
       v-if="initialValues"
       :initial-values="initialValues"
@@ -14,12 +14,14 @@
 <script>
 import {mapState} from 'vuex'
 import AppExpenseForm from '@/components/ExpenseForm'
+import AppExitButton from '@/components/ExitButton'
 import {actionTypes} from '@/store/modules/editExpense'
 
 export default {
   name: 'AppEditExpense',
   components: {
-    AppExpenseForm
+    AppExpenseForm,
+    AppExitButton
   },
   /*  data() {
     return {
