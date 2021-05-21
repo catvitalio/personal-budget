@@ -1,34 +1,28 @@
 <template>
-  <div class="container page">
-    <div v-if="isLoading" class="d-flex justify-content-center mt-4 pt-4">
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
+  <div class="page">
+    <app-loading v-if="isLoading" />
+    <app-exit-button :link="{name: 'expensesList'}" />
     <div v-if="expense">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <b-link :to="{name: 'expensesList'}"
-            ><b-button pill variant="outline-dark mb-3">✕</b-button></b-link
-          >
-          <div>
-            <b-card img-alt="Image" img-top tag="article">
-              <b-card-title
-                >Расход со счета {{ expense.budget.name }}
-              </b-card-title>
-              <b-card-text>Категория: {{ expense.category.name }}</b-card-text>
-              <b-card-text>Дата: {{ expense.date }}</b-card-text>
-              <b-card-text>Сумма: {{ expense.value }}</b-card-text>
+      <div class="page-content">
+        <h1>
+          Расход со счета <span class="value">{{ expense.budget.name }}</span>
+        </h1>
+        <h3>
+          Категория: <span class="value">{{ expense.category.name }}</span>
+        </h3>
+        <h3>
+          Дата: <span class="value">{{ expense.date }}</span>
+        </h3>
+        <h3>
+          Сумма: <span class="value">{{ expense.value }}</span>
+        </h3>
 
-              <b-link :to="{name: 'editExpense', params: {slug: expense.id}}"
-                ><b-button variant="dark">Изменить</b-button></b-link
-              >
-              <b-button @click="deleteExpense" variant="danger ml-1"
-                >Удалить</b-button
-              >
-            </b-card>
-          </div>
-        </div>
+        <router-link :to="{name: 'editExpense', params: {slug: expense.id}}"
+          ><button class="form-button">Изменить</button></router-link
+        >
+        <button class="form-button danger-button" @click="deleteExpense">
+          Удалить
+        </button>
       </div>
     </div>
   </div>
@@ -37,9 +31,15 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/expense'
+import AppLoading from '@/components/Loading'
+import AppExitButton from '@/components/ExitButton'
 
 export default {
   name: 'AppExpense',
+  components: {
+    AppLoading,
+    AppExitButton
+  },
   computed: {
     ...mapState({
       isLoading: state => state.expense.isLoading,

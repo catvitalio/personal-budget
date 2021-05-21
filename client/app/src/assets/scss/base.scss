@@ -75,7 +75,7 @@ body {
 form {
   box-shadow: $--box-shadow;
   border-radius: $--border-radius;
-  padding: 10px 0px;
+  padding: 10px 0px 0px;
 }
 
 fieldset {
@@ -116,6 +116,7 @@ select {
   border: none;
   transition: $--transition;
   cursor: pointer;
+  margin: 10px 0;
   &:hover {
     background-color: $--secondary;
     transition: $--transition;
@@ -125,4 +126,22 @@ select {
 .disabled {
   transition: $--transition;
   background-color: $--secondary;
+}
+
+.page-content {
+  box-shadow: $--box-shadow;
+  border-radius: $--border-radius;
+  margin: 20px 0;
+  padding: 5px 10px 3px;
+  h1 {
+    text-align: center;
+  }
+  .value {
+    color: $--primary;
+  }
+}
+
+.danger-button {
+  background-color: $--text;
+  color: white;
 }
