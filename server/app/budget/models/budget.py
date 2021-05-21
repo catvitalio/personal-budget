@@ -83,7 +83,7 @@ class Expense(models.Model):
         blank=True,
         null=True,
     )
-    tags = models.ManyToManyField(ExpenseTag)
+    tags = models.ManyToManyField(ExpenseTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
 
 
@@ -135,7 +135,7 @@ class Income(models.Model):
         blank=True,
         null=True,
     )
-    tags = models.ManyToManyField(IncomeTag)
+    tags = models.ManyToManyField(IncomeTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
 
 
@@ -175,5 +175,5 @@ class Transfer(models.Model):
         blank=True,
         null=True,
     )
-    tags = models.ManyToManyField(TransferTag)
+    tags = models.ManyToManyField(TransferTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget_from', 'budget_to'])
