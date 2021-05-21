@@ -36,7 +36,7 @@
       </li>
       <li v-if="isLoggedIn">
         <router-link class="nav-link" :to="{name: 'home'}">
-          {{ currentUser.username | truncate(6, '...') }}
+          {{ currentUser.username | truncate(7, '..') }}
         </router-link>
       </li>
     </ul>

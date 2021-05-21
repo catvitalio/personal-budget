@@ -1,8 +1,6 @@
 <template>
   <div class="page">
-    <div v-if="isLoading">
-      LOADING...
-    </div>
+    <app-loading v-if="isLoading" />
     <div v-if="expenses">
       <router-link type="button" :to="{name: 'createExpense'}"
         ><button class="page-button">+</button></router-link
@@ -20,7 +18,7 @@
                 <h3>{{ expense.date }}</h3>
                 <h1>{{ expense.category.name }}</h1>
                 <h2>{{ expense.value }}</h2>
-                <p>{{ expense.budget.name | truncate(6, '...') }}</p>
+                <p>{{ expense.budget.name | truncate(7, '..') }}</p>
               </div>
             </router-link>
           </div>
@@ -41,11 +39,13 @@
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/expensesList'
 import AppPagination from '@/components/Pagination'
+import AppLoading from '@/components/Loading'
 
 export default {
   name: 'AppExpensesList',
   components: {
-    AppPagination
+    AppPagination,
+    AppLoading
   },
   data() {
     return {
