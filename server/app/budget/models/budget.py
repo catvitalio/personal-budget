@@ -36,6 +36,17 @@ class Budget(models.Model):
         return self.name
 
 
+class ExpenseTag(models.Model):
+    name = models.CharField(max_length=255)
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class ExpenseCategory(models.Model):
     name = models.CharField(max_length=255)
     creator = models.ForeignKey(
@@ -72,7 +83,20 @@ class Expense(models.Model):
         blank=True,
         null=True,
     )
+    tags = models.ManyToManyField(ExpenseTag)
     tracker = FieldTracker(fields=['value', 'budget'])
+
+
+class IncomeTag(models.Model):
+    name = models.CharField(max_length=255)
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name
+
 
 
 class IncomeCategory(models.Model):
@@ -111,7 +135,19 @@ class Income(models.Model):
         blank=True,
         null=True,
     )
+    tags = models.ManyToManyField(IncomeTag)
     tracker = FieldTracker(fields=['value', 'budget'])
+
+
+class TransferTag(models.Model):
+    name = models.CharField(max_length=255)
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Transfer(models.Model):
@@ -139,4 +175,5 @@ class Transfer(models.Model):
         blank=True,
         null=True,
     )
+    tags = models.ManyToManyField(TransferTag)
     tracker = FieldTracker(fields=['value', 'budget_from', 'budget_to'])

@@ -3,44 +3,28 @@ from django.contrib import admin
 from budget.models import (
     BudgetType,
     Budget,
+    ExpenseTag,
     ExpenseCategory,
     Expense,
+    IncomeTag,
     IncomeCategory,
     Income,
+    TransferTag,
     Transfer
 )
 
 
-@admin.register(BudgetType)
-class BudgetTypeAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Budget)
+@admin.register(
+    BudgetType,
+    Budget,
+    ExpenseTag,
+    ExpenseCategory,
+    Expense,
+    IncomeTag,
+    IncomeCategory,
+    Income,
+    TransferTag,
+    Transfer
+)
 class BudgetAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(ExpenseCategory)
-class ExpenseCategoryAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Expense)
-class ExpenseAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(IncomeCategory)
-class IncomeCategoryAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Income)
-class IncomeAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Transfer)
-class TransferAdmin(admin.ModelAdmin):
     pass

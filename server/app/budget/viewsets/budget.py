@@ -5,23 +5,29 @@ from budget.serializers import (
     BudgetTypeSerializer,
     BudgetSerializer,
     BudgetDetailSerializer,
+    ExpenseTagSerializer,
     ExpenseCategorySerializer,
     ExpenseSerializer,
     ExpenseDetailSerializer,
+    IncomeTagSerializer,
     IncomeCategorySerializer,
     IncomeSerializer,
     IncomeDetailSerializer,
+    TransferTagSerializer,
     TransferSerializer,
     TransferDetailSerializer
 )
 from budget.models import (
     BudgetType,
     Budget,
+    ExpenseTag,
     ExpenseCategory,
     Expense,
+    IncomeTag,
     IncomeCategory,
     Income,
-    Transfer,
+    TransferTag,
+    Transfer
 )
 from budget.permissions import (
     ObjectCreatorPermission, 
@@ -55,6 +61,15 @@ class BudgetViewSet(ModelViewSet):
             return BudgetSerializer
 
 
+class ExpenseTagViewSet(ModelViewSet):
+    pagination_class = None
+    serializer_class = ExpenseTagSerializer
+    permission_classes = [ObjectCreatorPermission]
+
+    def get_queryset(self):
+        return ExpenseTag.objects.filter(creator=self.request.user)
+
+
 class ExpenseCategoryViewSet(ModelViewSet):
     pagination_class = None
     serializer_class = ExpenseCategorySerializer
@@ -80,6 +95,15 @@ class ExpenseViewSet(ModelViewSet):
             return ExpenseSerializer
 
 
+class IncomeTagViewSet(ModelViewSet):
+    pagination_class = None
+    serializer_class = IncomeTagSerializer
+    permission_classes = [ObjectCreatorPermission]
+
+    def get_queryset(self):
+        return IncomeTag.objects.filter(creator=self.request.user)
+
+
 class IncomeCategoryViewSet(ModelViewSet):
     pagination_class = None
     serializer_class = IncomeCategorySerializer
@@ -103,6 +127,15 @@ class IncomeViewSet(ModelViewSet):
             return IncomeDetailSerializer
         else:
             return IncomeSerializer
+
+
+class TransferTagViewSet(ModelViewSet):
+    pagination_class = None
+    serializer_class = TransferTagSerializer
+    permission_classes = [ObjectCreatorPermission]
+
+    def get_queryset(self):
+        return TransferTag.objects.filter(creator=self.request.user)
 
 
 class TransferViewSet(ModelViewSet):

@@ -7,11 +7,14 @@ from django.contrib.auth.models import User
 from budget.models import (
     BudgetType,
     Budget,
+    ExpenseTag,
     ExpenseCategory,
     Expense,
+    IncomeTag,
     IncomeCategory,
     Income,
-    Transfer,
+    TransferTag,
+    Transfer
 )
 
 
@@ -39,6 +42,17 @@ class BudgetSerializer(ModelSerializer):
 
 class BudgetDetailSerializer(BudgetSerializer, BudgetSerializer.Meta):
     budget_type = BudgetTypeSerializer(read_only=True)
+
+
+class ExpenseTagSerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
+    class Meta:
+        model = ExpenseTag
+        fields = '__all__'
 
 
 class ExpenseCategorySerializer(ModelSerializer):
@@ -69,6 +83,18 @@ class ExpenseSerializer(ModelSerializer):
 class ExpenseDetailSerializer(ExpenseSerializer, ExpenseSerializer.Meta):
     category = ExpenseCategorySerializer(read_only=True)
     budget = BudgetSerializer(read_only=True)
+    tags = ExpenseTagSerializer(many=True, read_only=True)
+
+
+class IncomeTagSerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
+    class Meta:
+        model = IncomeTag
+        fields = '__all__'
 
 
 class IncomeCategorySerializer(ModelSerializer):
@@ -92,6 +118,18 @@ class IncomeSerializer(ModelSerializer):
 class IncomeDetailSerializer(IncomeSerializer, IncomeSerializer.Meta):
     category = IncomeCategorySerializer(read_only=True)
     budget = BudgetSerializer(read_only=True)
+    tags = IncomeTagSerializer(many=True, read_only=True)
+
+
+class TransferTagSerializer(ModelSerializer):
+    creator = PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=CurrentUserDefault()
+    )
+
+    class Meta:
+        model = TransferTag
+        fields = '__all__'
 
 
 class TransferSerializer(ModelSerializer):
@@ -111,3 +149,4 @@ class TransferSerializer(ModelSerializer):
 class TransferDetailSerializer(TransferSerializer, TransferSerializer.Meta):
     budget_from = BudgetSerializer(read_only=True)
     budget_to = BudgetSerializer(read_only=True)
+    tags = TransferTagSerializer(many=True, read_only=True)
