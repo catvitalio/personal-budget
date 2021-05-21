@@ -1,50 +1,35 @@
 <template>
-  <div class="auth-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Вход</h1>
+  <div class="auth page">
+    <h1>Вход</h1>
+    <form @submit.prevent="onSubmit">
+      <fieldset>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Имя пользователя"
+          v-model="username"
+        />
+      </fieldset>
 
-          <p class="text-xs-center">
-            <router-link :to="{name: 'register'}"
-              >У Вас нет аккаунта?</router-link
-            >
-          </p>
+      <fieldset>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Пароль"
+          v-model="password"
+        />
+      </fieldset>
+      <fieldset>
+        <button class="form-button" :disabled="isSubmitting">
+          Войти
+        </button>
+      </fieldset>
+    </form>
 
-          <app-validation-errors
-            v-if="validationErrors"
-            :validation-errors="validationErrors"
-          ></app-validation-errors>
-
-          <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Имя пользователя"
-                v-model="username"
-              />
-            </fieldset>
-
-            <fieldset class="form-group">
-              <input
-                type="password"
-                class="form-control form-control-lg"
-                placeholder="Пароль"
-                v-model="password"
-              />
-            </fieldset>
-
-            <button
-              class="btn btn-lg btn-primary float-right"
-              :disabled="isSubmitting"
-            >
-              Войти
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <app-validation-errors
+      v-if="validationErrors"
+      :validation-errors="validationErrors"
+    ></app-validation-errors>
   </div>
 </template>
 

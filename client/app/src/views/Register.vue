@@ -1,44 +1,35 @@
 <template>
-  <div class="auth-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Регистрация</h1>
+  <div class="auth page">
+    <h1>Регистрация</h1>
+    <form @submit.prevent="onSubmit">
+      <fieldset>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Имя пользователя"
+          v-model="username"
+        />
+      </fieldset>
 
-          <app-validation-errors
-            v-if="validationErrors"
-            :validation-errors="validationErrors"
-          ></app-validation-errors>
+      <fieldset>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Пароль"
+          v-model="password"
+        />
+      </fieldset>
+      <fieldset>
+        <button class="form-button" :disabled="isSubmitting">
+          Создать
+        </button>
+      </fieldset>
+    </form>
 
-          <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Имя пользователя"
-                v-model="username"
-              />
-            </fieldset>
-
-            <fieldset class="form-group">
-              <input
-                type="password"
-                class="form-control form-control-lg"
-                placeholder="Пароль"
-                v-model="password"
-              />
-            </fieldset>
-
-            <button
-              class="btn btn-lg btn-primary float-right"
-              :disabled="isSubmitting"
-            >
-              Создать
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <app-validation-errors
+      v-if="validationErrors"
+      :validation-errors="validationErrors"
+    ></app-validation-errors>
   </div>
 </template>
 
