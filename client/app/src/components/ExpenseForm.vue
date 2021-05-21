@@ -33,7 +33,9 @@
       </fieldset>
     </form>
 
-    <app-validation-errors v-if="errors" :validation-errors="errors" />
+    <transition name="fade">
+      <app-validation-errors v-if="errors" :validation-errors="errors" />
+    </transition>
   </div>
 </template>
 

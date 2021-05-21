@@ -1,5 +1,6 @@
 <template>
   <ul class="error-messages">
+    <h2>Ошибки валидации:</h2>
     <li
       class="danger"
       v-for="errorMessage in errorMessages"
@@ -38,10 +39,8 @@ export default {
 
 .danger {
   list-style: none;
-  font-size: 14px;
+  font-size: $--font-size-base;
   margin-bottom: 10px;
-  border-radius: $--border-radius;
-  background-color: $--additional;
   font-weight: $--font-weight-light;
 }
 </style>

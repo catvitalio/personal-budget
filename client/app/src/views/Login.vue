@@ -26,10 +26,12 @@
       </fieldset>
     </form>
 
-    <app-validation-errors
-      v-if="validationErrors"
-      :validation-errors="validationErrors"
-    ></app-validation-errors>
+    <transition name="fade">
+      <app-validation-errors
+        v-if="validationErrors"
+        :validation-errors="validationErrors"
+      ></app-validation-errors>
+    </transition>
   </div>
 </template>
 
