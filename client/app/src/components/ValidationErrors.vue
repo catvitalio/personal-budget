@@ -1,7 +1,7 @@
 <template>
   <ul class="error-messages">
     <li
-      class="badge badge-pill badge-danger"
+      class="danger"
       v-for="errorMessage in errorMessages"
       :key="errorMessage"
     >
@@ -29,3 +29,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.error-messages {
+  padding: 0;
+  text-align: center;
+}
+
+.danger {
+  list-style: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-radius: $--border-radius;
+  background-color: $--additional;
+  font-weight: $--font-weight-light;
+}
+</style>

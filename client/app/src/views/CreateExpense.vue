@@ -1,6 +1,6 @@
 <template>
   <div>
-    Create Expense
+    <app-exit-button />
     <app-expense-form
       :initial-values="initialValues"
       :errors="validationErrors"
@@ -13,12 +13,14 @@
 <script>
 import {mapState} from 'vuex'
 import AppExpenseForm from '@/components/ExpenseForm'
+import AppExitButton from '@/components/ExitButton'
 import {actionTypes} from '@/store/modules/createExpense'
 
 export default {
   name: 'AppCreateExpense',
   components: {
-    AppExpenseForm
+    AppExpenseForm,
+    AppExitButton
   },
   data() {
     return {

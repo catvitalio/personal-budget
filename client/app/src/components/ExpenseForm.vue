@@ -1,69 +1,39 @@
 <template>
-  <div class="editor-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <app-validation-errors v-if="errors" :validation-errors="errors" />
+  <div class="page">
+    <form @submit.prevent="onSubmit">
+      <fieldset>
+        <select class="form-select" v-model="budget">
+          <option value="">Счет</option>
+          <option v-for="item in budgetsList" :value="item.id" :key="item.id">{{
+            item.name
+          }}</option></select
+        >
+      </fieldset>
+      <fieldset>
+        <input type="number" placeholder="Значение" v-model="value" />
+      </fieldset>
+      <fieldset>
+        <input type="date" placeholder="Дата" v-model="date" />
+      </fieldset>
+      <fieldset>
+        <select type="text" placeholder="Категория" v-model="category">
+          <option value="">Категория</option>
+          <option
+            v-for="item in categoriesList"
+            :value="item.id"
+            :key="item.id"
+            >{{ item.name }}</option
+          >
+        </select>
+      </fieldset>
+      <fieldset>
+        <button type="submit" class="form-button" :disabled="isSubmitting">
+          Добавить
+        </button>
+      </fieldset>
+    </form>
 
-          <form @submit.prevent="onSubmit">
-            <fieldset>
-              <fieldset class="form-group">
-                <select class="form-control form-control-lg" v-model="budget">
-                  <option value="">Счет</option>
-                  <option
-                    v-for="item in budgetsList"
-                    :value="item.id"
-                    :key="item.id"
-                    >{{ item.name }}</option
-                  ></select
-                >
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="number"
-                  class="form-control form-control-lg"
-                  placeholder="Значение"
-                  v-model="value"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="date"
-                  class="form-control form-control-lg"
-                  placeholder="Дата"
-                  v-model="date"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <select
-                  type="text"
-                  class="form-control form-control-lg"
-                  placeholder="Категория"
-                  v-model="category"
-                >
-                  <option value="">Категория</option>
-                  <option
-                    v-for="item in categoriesList"
-                    :value="item.id"
-                    :key="item.id"
-                    >{{ item.name }}</option
-                  >
-                </select>
-              </fieldset>
-              <fieldset class="form-group">
-                <button
-                  type="submit"
-                  class="btn btn-lg pull-xs-right btn-dark"
-                  :disabled="isSubmitting"
-                >
-                  Добавить
-                </button>
-              </fieldset>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
+    <app-validation-errors v-if="errors" :validation-errors="errors" />
   </div>
 </template>
 
