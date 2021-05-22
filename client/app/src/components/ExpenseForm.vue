@@ -5,7 +5,7 @@
         <multiselect
           v-model="budget"
           label="name"
-          :options="categoriesList"
+          :options="budgetsList"
           :searchable="false"
           :show-labels="false"
           track-by="id"
