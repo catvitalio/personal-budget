@@ -2,7 +2,9 @@
   <nav>
     <ul class="navbar">
       <li>
-        <router-link :to="{name: 'home'}">PB</router-link>
+        <router-link :to="{name: 'home'}" active-class="active" exact
+          >PB</router-link
+        >
       </li>
       <li v-if="isLoggedIn">
         <router-link :to="{name: 'sourcesList'}" active-class="active"
