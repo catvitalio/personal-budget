@@ -45,6 +45,17 @@ class BudgetDetailSerializer(BudgetSerializer, BudgetSerializer.Meta):
 
 
 class ExpenseTagSerializer(ModelSerializer):
+    def validate(self, data):
+        user = self.context['request'].user.id
+        tags = self.__class__.Meta.model.objects.filter(
+            creator=user, name=data["name"]
+        )
+        if tags.exists():
+            raise ValidationError({
+                'name': 'Тег с таким именем уже существует'
+            })
+        return data
+
     creator = PrimaryKeyRelatedField(
         queryset=User.objects.all(),
         default=CurrentUserDefault()
@@ -86,12 +97,7 @@ class ExpenseDetailSerializer(ExpenseSerializer, ExpenseSerializer.Meta):
     tags = ExpenseTagSerializer(many=True, read_only=True)
 
 
-class IncomeTagSerializer(ModelSerializer):
-    creator = PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        default=CurrentUserDefault()
-    )
-
+class IncomeTagSerializer(ExpenseTagSerializer):
     class Meta:
         model = IncomeTag
         fields = '__all__'
@@ -121,12 +127,7 @@ class IncomeDetailSerializer(IncomeSerializer, IncomeSerializer.Meta):
     tags = IncomeTagSerializer(many=True, read_only=True)
 
 
-class TransferTagSerializer(ModelSerializer):
-    creator = PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        default=CurrentUserDefault()
-    )
-
+class TransferTagSerializer(ExpenseTagSerializer):
     class Meta:
         model = TransferTag
         fields = '__all__'
