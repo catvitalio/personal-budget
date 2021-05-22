@@ -1,30 +1,53 @@
 <template>
   <div class="page">
     <form @submit.prevent="onSubmit">
-      <fieldset>
-        <select class="form-select" v-model="budget">
-          <option value="">Счет</option>
-          <option v-for="item in budgetsList" :value="item.id" :key="item.id">{{
-            item.name
-          }}</option></select
-        >
+      <fieldset class="singleselect-fieldset">
+        <multiselect
+          v-model="budget"
+          label="name"
+          :options="categoriesList"
+          :searchable="false"
+          :show-labels="false"
+          track-by="id"
+          placeholder="Счет"
+        ></multiselect>
       </fieldset>
-      <fieldset>
+      <fieldset class="default-fieldset">
         <input type="number" placeholder="Значение" v-model="value" />
       </fieldset>
-      <fieldset>
+      <fieldset class="default-fieldset">
         <input type="date" placeholder="Дата" v-model="date" />
       </fieldset>
-      <fieldset>
-        <select type="text" placeholder="Категория" v-model="category">
-          <option value="">Категория</option>
-          <option
-            v-for="item in categoriesList"
-            :value="item.id"
-            :key="item.id"
-            >{{ item.name }}</option
-          >
-        </select>
+      <fieldset class="singleselect-fieldset">
+        <multiselect
+          v-model="category"
+          label="name"
+          :options="categoriesList"
+          :searchable="false"
+          :show-labels="false"
+          track-by="id"
+          placeholder="Категория"
+        ></multiselect>
+      </fieldset>
+      <fieldset class="multiselect-fieldset">
+        <div class="multiselect-form">
+          <multiselect
+            v-model="tags"
+            tag-placeholder="Добавить новый тег"
+            placeholder="Теги"
+            selectLabel=""
+            selectGroupLabel=""
+            selectedLabel="Выбрано"
+            deselectLabel="Выбрано"
+            deselectGroupLabel=""
+            label="name"
+            track-by="id"
+            :options="tagsList"
+            :multiple="true"
+            :taggable="true"
+            @tag="addTag"
+          ></multiselect>
+        </div>
       </fieldset>
       <fieldset>
         <button type="submit" class="form-button" :disabled="isSubmitting">
@@ -42,11 +65,21 @@
 <script>
 import expenseApi from '@/api/expense'
 import AppValidationErrors from '@/components/ValidationErrors'
+import {actionTypes} from '@/store/modules/createTag'
+import Multiselect from 'vue-multiselect'
+import {getterTypes} from '@/store/modules/createTag'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'AppExpenseForm',
   components: {
-    AppValidationErrors
+    AppValidationErrors,
+    Multiselect
+  },
+  computed: {
+    ...mapGetters({
+      tag: [getterTypes].tag
+    })
   },
   props: {
     initialValues: {
@@ -68,9 +101,11 @@ export default {
       value: this.initialValues.value,
       date: this.initialValues.date,
       category: this.initialValues.category,
+      tags: this.initialValues.tags,
 
       budgetsList: [],
-      categoriesList: []
+      categoriesList: [],
+      tagsList: []
     }
   },
   mounted() {
@@ -80,17 +115,63 @@ export default {
     expenseApi.getCategoriesList().then(response => {
       this.categoriesList = response.data
     })
+    this.fetchTags()
   },
   methods: {
+    addTag(newTag) {
+      const tag = {
+        name: newTag
+      }
+      this.$store.dispatch(actionTypes.createTag, tag).then(() => {
+        this.fetchTags()
+        this.tags.push(this.tag)
+      })
+    },
     onSubmit() {
       const form = {
-        budget: Number(this.budget),
+        budget: this.budget.id,
         value: Number(this.value),
         date: this.date,
-        category: Number(this.category)
+        category: this.category.id,
+        tags: this.tags.map(obj => obj.id)
       }
       this.$emit('expenseSubmit', form)
+    },
+    fetchTags() {
+      expenseApi.getTagsList().then(response => {
+        this.tagsList = response.data
+      })
     }
   }
 }
 </script>
+
+<style lang="scss">
+.multiselect {
+  font-family: $--font-family;
+  font-size: $--font-size-base;
+  font-weight: $--font-weight-medium;
+  color: $--text;
+}
+
+.multiselect__tag {
+  background: #f0f0f0 !important;
+  border: $--border !important;
+  color: $--text !important;
+  margin-bottom: 0px !important;
+  margin-right: 5px !important;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: $--primary !important;
+}
+
+.multiselect__option--highlight {
+  background: $--primary !important;
+}
+
+.multiselect__option--highlight:after {
+  background: $--primary !important;
+}
+</style>

@@ -45,6 +45,20 @@ const actions = {
           )
         })
     })
+  },
+  [actionTypes.createTag](context, tagInput) {
+    return new Promise(resolve => {
+      context.commit(mutationTypes.createTagStart, tagInput)
+      expenseApi
+        .createTag(tagInput)
+        .then(tag => {
+          context.commit(mutationTypes.createTagSuccess, tag.data)
+          resolve(tag.data)
+        })
+        .catch(result => {
+          context.commit(mutationTypes.createTagFailure, result.response.data)
+        })
+    })
   }
 }
 

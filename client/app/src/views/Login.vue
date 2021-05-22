@@ -2,7 +2,7 @@
   <div class="auth page">
     <h1>Вход</h1>
     <form @submit.prevent="onSubmit">
-      <fieldset>
+      <fieldset class="default-fieldset">
         <input
           type="text"
           class="form-control"
@@ -11,7 +11,7 @@
         />
       </fieldset>
 
-      <fieldset>
+      <fieldset class="default-fieldset">
         <input
           type="password"
           class="form-control"

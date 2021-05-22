@@ -45,10 +45,11 @@ export default {
         return null
       }
       return {
-        budget: this.expense.budget.id,
+        budget: this.expense.budget,
         value: this.expense.value,
         date: this.expense.date,
-        category: this.expense.category.id
+        category: this.expense.category,
+        tags: this.expense.tags
       }
     }
   },

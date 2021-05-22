@@ -28,7 +28,8 @@ export default {
         budget: '',
         value: '',
         date: '',
-        category: ''
+        category: '',
+        tags: []
       }
     }
   },

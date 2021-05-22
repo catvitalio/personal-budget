@@ -16,6 +16,12 @@
         <h3>
           Сумма: <span class="value">{{ expense.value }}</span>
         </h3>
+        <h3>
+          Теги:
+          <span class="value">{{
+            expense.tags.map(o => Object.values(o)[2])
+          }}</span>
+        </h3>
 
         <router-link :to="{name: 'editExpense', params: {slug: expense.id}}"
           ><button class="form-button">Изменить</button></router-link
