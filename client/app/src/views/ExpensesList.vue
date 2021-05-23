@@ -26,8 +26,15 @@
             <div class="content" @click="clickExpense(expense)">
               <h3>{{ expense.date }}</h3>
               <h1>{{ expense.category.name }}</h1>
-              <h2>{{ expense.value }}</h2>
-              <p>{{ expense.budget.name | truncate(7, '..') }}</p>
+              <p>
+                {{ expense.budget.name }}:
+                {{ expense.value }}
+              </p>
+              <span
+                v-for="tag in expense.tags.map(tag => tag.name)"
+                :key="tag"
+                >{{ tag }}</span
+              >
             </div>
           </div>
         </div>

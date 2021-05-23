@@ -79,8 +79,18 @@ body {
       font-size: $--font-size-subtitle;
     }
     p {
-      margin-left: 87%;
-      margin-top: -33px;
+    }
+    span {
+      font-size: $--font-size-small;
+      font-weight: $--font-weight-medium;
+      background: #f0f0f0;
+      border-radius: $--border-radius;
+      border: $--border;
+      color: $--text;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      padding: 3px 10px;
+      display: inline-block;
     }
   }
   &:hover {
