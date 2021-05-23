@@ -4,15 +4,20 @@
       <h1>Personal Budget</h1>
       <img alt="Vue logo" src="../assets/logo.svg" />
     </div>
+    <div class="statistics" v-if="isLoggedIn"><app-statistics /></div>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import {getterTypes} from '@/store/modules/auth'
+import AppStatistics from '@/components/Statistics'
 
 export default {
   name: 'Home',
+  components: {
+    AppStatistics
+  },
   computed: {
     ...mapGetters({
       isLoggedIn: getterTypes.isLoggedIn,

@@ -43,7 +43,8 @@ class BudgetTypeViewSet(ModelViewSet):
 
     def get_queryset(self):
         return BudgetType.objects.filter(
-            Q(creator=self.request.user) | Q(creator=None))
+            Q(creator=self.request.user) | Q(creator=None)
+        )
 
 
 class BudgetViewSet(ModelViewSet):
@@ -52,7 +53,8 @@ class BudgetViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Budget.objects.filter(
-            Q(creator=self.request.user) | Q(creator=None))
+            Q(creator=self.request.user) | Q(creator=None)
+        )
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -77,7 +79,8 @@ class ExpenseCategoryViewSet(ModelViewSet):
 
     def get_queryset(self):
         return ExpenseCategory.objects.filter(
-            Q(creator=self.request.user) | Q(creator=None))
+            Q(creator=self.request.user) | Q(creator=None)
+        )
 
 
 class ExpenseViewSet(ModelViewSet):
@@ -86,7 +89,7 @@ class ExpenseViewSet(ModelViewSet):
     def get_queryset(self):
         return Expense.objects.filter(
             Q(budget__creator=self.request.user) | 
-            Q(budget__creator=None)).order_by('-id')
+            Q(budget__creator=None)).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -111,7 +114,8 @@ class IncomeCategoryViewSet(ModelViewSet):
 
     def get_queryset(self):
         return IncomeCategory.objects.filter(
-            Q(creator=self.request.user) | Q(creator=None))
+            Q(creator=self.request.user) | Q(creator=None)
+        )
 
 
 class IncomeViewSet(ModelViewSet):
@@ -120,7 +124,7 @@ class IncomeViewSet(ModelViewSet):
     def get_queryset(self):
         return Income.objects.filter(
             Q(budget__creator=self.request.user) | 
-            Q(budget__creator=None)).order_by('-id')
+            Q(budget__creator=None)).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -144,7 +148,7 @@ class TransferViewSet(ModelViewSet):
     def get_queryset(self):
         return Transfer.objects.filter(
                 Q(budget_from__creator=self.request.user) | 
-                Q(budget_to__creator=self.request.user)).order_by('-id')
+                Q(budget_to__creator=self.request.user)).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':

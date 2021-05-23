@@ -21,7 +21,6 @@ class Budget(models.Model):
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        default=0.0
     )
     budget_type = models.ForeignKey(
         BudgetType,
@@ -61,15 +60,9 @@ class ExpenseCategory(models.Model):
 
 
 class Expense(models.Model):
-    name = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-    )
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        default=0.0,
     )
     category = models.ForeignKey(
         ExpenseCategory,
@@ -79,12 +72,12 @@ class Expense(models.Model):
         Budget,
         on_delete=models.CASCADE,
     )
-    date = models.DateField(
-        blank=True,
-        null=True,
-    )
+    date = models.DateField()
     tags = models.ManyToManyField(ExpenseTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
+
+    def __str__(self):
+        return self.value
 
 
 class IncomeTag(models.Model):
@@ -96,7 +89,6 @@ class IncomeTag(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class IncomeCategory(models.Model):
@@ -113,15 +105,9 @@ class IncomeCategory(models.Model):
 
 
 class Income(models.Model):
-    name = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-    )
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        default=0.0,
     )
     category = models.ForeignKey(
         IncomeCategory,
@@ -131,12 +117,12 @@ class Income(models.Model):
         Budget,
         on_delete=models.CASCADE,
     )
-    date = models.DateField(
-        blank=True,
-        null=True,
-    )
+    date = models.DateField()
     tags = models.ManyToManyField(IncomeTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
+
+    def __str__(self):
+        return self.value
 
 
 class TransferTag(models.Model):
@@ -151,15 +137,9 @@ class TransferTag(models.Model):
 
 
 class Transfer(models.Model):
-    name = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-    )
     value = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        default=0.0,
     )
     budget_from = models.ForeignKey(
         Budget,
@@ -171,9 +151,9 @@ class Transfer(models.Model):
         on_delete=models.CASCADE,
         related_name='transfer_to',
     )
-    date = models.DateField(
-        blank=True,
-        null=True,
-    )
+    date = models.DateField()
     tags = models.ManyToManyField(TransferTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget_from', 'budget_to'])
+
+    def __str__(self):
+        return self.value
