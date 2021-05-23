@@ -2,9 +2,18 @@
   <div class="page">
     <app-loading v-if="isLoading" />
     <div v-if="expenses">
-      <router-link type="button" :to="{name: 'createExpense'}"
-        ><button class="page-button">+</button></router-link
-      >
+      <transition name="slide">
+        <app-create-expense v-if="createForm" :show.sync="createForm" />
+      </transition>
+      <transition name="slide">
+        <button
+          @click="createForm = !createForm"
+          v-if="!createForm"
+          class="page-button"
+        >
+          +
+        </button>
+      </transition>
       <div class="cards-list">
         <div v-for="expense in expenses" :key="expense">
           <div class="card">
@@ -24,13 +33,16 @@
           </div>
         </div>
       </div>
-      <app-pagination
-        v-if="total > 5"
-        :hasNextPage="hasNextPage"
-        :hasPrevPage="hasPrevPage"
-        :total="total"
-        @currentPage="fetchExpenses"
-      />
+
+      <transition name="fade">
+        <app-pagination
+          v-if="total > 5"
+          :hasNextPage="hasNextPage"
+          :hasPrevPage="hasPrevPage"
+          :total="total"
+          @currentPage="fetchExpenses"
+        />
+      </transition>
     </div>
   </div>
 </template>
@@ -40,16 +52,19 @@ import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/expensesList'
 import AppPagination from '@/components/Pagination'
 import AppLoading from '@/components/Loading'
+import AppCreateExpense from '@/components/CreateExpense'
 
 export default {
   name: 'AppExpensesList',
   components: {
     AppPagination,
-    AppLoading
+    AppLoading,
+    AppCreateExpense
   },
   data() {
     return {
-      startPage: 1
+      startPage: 1,
+      createForm: false
     }
   },
   computed: {
@@ -63,7 +78,7 @@ export default {
     })
   },
   watch: {
-    currentPage() {
+    createForm() {
       this.fetchExpenses(this.startPage)
     }
   },

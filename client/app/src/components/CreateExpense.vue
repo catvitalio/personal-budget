@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-exit-button :link="{name: 'expensesList'}" />
+    <button class="exit-button" @click="changeShow()">✕</button>
     <app-expense-form
       :initial-values="initialValues"
       :errors="validationErrors"
@@ -13,14 +13,12 @@
 <script>
 import {mapState} from 'vuex'
 import AppExpenseForm from '@/components/ExpenseForm'
-import AppExitButton from '@/components/ExitButton'
 import {actionTypes} from '@/store/modules/createExpense'
 
 export default {
   name: 'AppCreateExpense',
   components: {
-    AppExpenseForm,
-    AppExitButton
+    AppExpenseForm
   },
   data() {
     return {
@@ -31,6 +29,12 @@ export default {
         category: '',
         tags: []
       }
+    }
+  },
+  props: {
+    show: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
@@ -44,8 +48,11 @@ export default {
       this.$store
         .dispatch(actionTypes.createExpense, {expenseInput})
         .then(() => {
-          this.$router.push({name: 'expensesList'})
+          this.changeShow()
         })
+    },
+    changeShow() {
+      this.$emit('update:show', (this.show = !this.show))
     }
   }
 }

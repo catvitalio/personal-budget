@@ -1,6 +1,7 @@
 <template>
-  <div class="page">
-    <router-link :to="link"><button class="exit-button">✕</button></router-link>
+  <div>
+    {{ show }}
+    <button class="exit-button" @click="changeShow()">✕</button>
   </div>
 </template>
 
@@ -8,9 +9,14 @@
 export default {
   name: 'AppExitButton',
   props: {
-    link: {
-      type: Object,
+    show: {
+      type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    changeShow() {
+      this.$emit('update:show', (this.show = !this.show))
     }
   }
 }
