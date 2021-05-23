@@ -3,6 +3,17 @@
     <form @submit.prevent="onSubmit">
       <fieldset class="singleselect-fieldset">
         <multiselect
+          v-model="category"
+          label="name"
+          :options="categoriesList"
+          :searchable="false"
+          :show-labels="false"
+          track-by="id"
+          placeholder="Категория"
+        ></multiselect>
+      </fieldset>
+      <fieldset class="singleselect-fieldset">
+        <multiselect
           v-model="budget"
           label="name"
           :options="budgetsList"
@@ -17,17 +28,6 @@
       </fieldset>
       <fieldset class="default-fieldset">
         <input type="date" placeholder="Дата" v-model="date" />
-      </fieldset>
-      <fieldset class="singleselect-fieldset">
-        <multiselect
-          v-model="category"
-          label="name"
-          :options="categoriesList"
-          :searchable="false"
-          :show-labels="false"
-          track-by="id"
-          placeholder="Категория"
-        ></multiselect>
       </fieldset>
       <fieldset class="multiselect-fieldset">
         <div class="multiselect-form">
