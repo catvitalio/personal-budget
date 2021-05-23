@@ -4,17 +4,8 @@ $--cream: #f8efe4;
 $--rosewater: #e6c2bf;
 $--black: #282120;
 $--red: #f55c47;
+$--gray: #f0f0f0;
 //$--black: #4c5355;
-
-// theme settings
-$--primary: $--yellow;
-$--secondary: $--rosewater;
-$--additional: $--cream;
-$--danger: $--red;
-$--text: $--black;
-$--border-radius: 5px;
-$--border: 1px solid #ccc;
-$--box-shadow: 0px 0px 2px gray;
 
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;300;400;500;700&display=swap');
@@ -32,3 +23,16 @@ $--font-size-subtitle: 24px;
 
 // animations
 $--transition: all 0.2s ease-in;
+
+// theme settings
+$--primary: $--yellow;
+$--secondary: $--rosewater;
+$--additional: $--cream;
+$--danger: $--red;
+$--text: $--black;
+$--placeholder: #adadad;
+$--tag: $--gray;
+$--placeholder-size: 14px;
+$--border-radius: 5px;
+$--border: 1px solid #ccc;
+$--box-shadow: 0px 0px 2px gray;

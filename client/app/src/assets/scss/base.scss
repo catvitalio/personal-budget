@@ -78,12 +78,10 @@ body {
       margin-top: -30px;
       font-size: $--font-size-subtitle;
     }
-    p {
-    }
     span {
       font-size: $--font-size-small;
       font-weight: $--font-weight-medium;
-      background: #f0f0f0;
+      background: $--tag;
       border-radius: $--border-radius;
       border: $--border;
       color: $--text;
@@ -123,11 +121,14 @@ fieldset {
     border: 1px solid #e8e8e8 !important;
     border-radius: $--border-radius;
     box-sizing: border-box;
-    color: $--text;
     font-size: $--font-size-base;
     font-weight: $--font-weight-medium;
     font-family: $--font-family;
     outline: none;
+    &::placeholder {
+      color: $--placeholder;
+      font-size: $--placeholder-size;
+    }
   }
 }
 
@@ -193,4 +194,59 @@ fieldset {
     background-color: $--secondary;
     transition: $--transition;
   }
+}
+
+.multiselect {
+  font-family: $--font-family;
+  font-size: $--font-size-base;
+  font-weight: $--font-weight-medium;
+  color: $--text;
+}
+
+.multiselect__tag {
+  background: $--tag !important;
+  border: $--border !important;
+  color: $--text !important;
+  margin-bottom: 0px !important;
+  margin-right: 5px !important;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: $--primary !important;
+}
+
+.multiselect__option--highlight {
+  background: $--primary !important;
+}
+
+.multiselect__option--highlight:after {
+  background: $--primary !important;
+}
+
+// dateselect
+.vdpArrowPrev:after {
+  border-right-color: $--primary;
+}
+
+.vdpArrowNext:after {
+  border-left-color: $--primary;
+}
+
+.vdpCell.selectable:hover .vdpCellContent,
+.vdpCell.selected .vdpCellContent {
+  background: $--primary;
+}
+
+.vdpCell.today {
+  color: $--primary;
+}
+
+.vdpTimeUnit > input:hover,
+.vdpTimeUnit > input:focus {
+  border-bottom-color: $--primary;
+}
+
+.vdpClearInput {
+  display: none;
 }

@@ -27,7 +27,7 @@
         <input type="number" placeholder="Значение" v-model="value" />
       </fieldset>
       <fieldset class="default-fieldset">
-        <input type="date" placeholder="Дата" v-model="date" />
+        <dateselect v-model="date" :inputAttributes="{size: 50}" />
       </fieldset>
       <fieldset class="multiselect-fieldset">
         <div class="multiselect-form">
@@ -145,33 +145,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.multiselect {
-  font-family: $--font-family;
-  font-size: $--font-size-base;
-  font-weight: $--font-weight-medium;
-  color: $--text;
-}
-
-.multiselect__tag {
-  background: #f0f0f0 !important;
-  border: $--border !important;
-  color: $--text !important;
-  margin-bottom: 0px !important;
-  margin-right: 5px !important;
-}
-
-.multiselect__tag-icon:focus,
-.multiselect__tag-icon:hover {
-  background: $--primary !important;
-}
-
-.multiselect__option--highlight {
-  background: $--primary !important;
-}
-
-.multiselect__option--highlight:after {
-  background: $--primary !important;
-}
-</style>
