@@ -83,7 +83,7 @@ nav {
 
 .navbar {
   list-style: none;
-  width: 400px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
