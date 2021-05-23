@@ -24,7 +24,7 @@
         ></multiselect>
       </fieldset>
       <fieldset class="default-fieldset">
-        <input type="number" placeholder="Значение" v-model="value" />
+        <input type="number" min="0" placeholder="Значение" v-model="value" />
       </fieldset>
       <fieldset class="default-fieldset">
         <dateselect
