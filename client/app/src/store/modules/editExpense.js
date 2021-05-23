@@ -54,7 +54,7 @@ const actions = {
           resolve(expense.data)
         })
         .catch(result => {
-          context.commit(mutationTypes.editExpenseFailure, result.data)
+          context.commit(mutationTypes.editExpenseFailure, result.response.data)
         })
     })
   },
@@ -68,7 +68,10 @@ const actions = {
           resolve()
         })
         .catch(result => {
-          context.commit(mutationTypes.deleteExpenseFailure, result)
+          context.commit(
+            mutationTypes.deleteExpenseFailure,
+            result.response.data
+          )
         })
     })
   }
