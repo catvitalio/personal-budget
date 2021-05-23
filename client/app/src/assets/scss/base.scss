@@ -35,13 +35,33 @@ body {
     transition: $--transition;
   }
 }
-
 .card {
   display: block;
   box-shadow: $--box-shadow;
   border-radius: $--border-radius;
   cursor: pointer;
   transition: $--transition;
+  &:hover {
+    transition: $--transition;
+    button {
+      display: block;
+      position: absolute;
+      font-size: $--font-size-small;
+      text-align: center;
+      cursor: pointer;
+      border-radius: $--border-radius;
+      border: none;
+      background: none;
+      transition: $--transition;
+      &:hover {
+        background-color: $--secondary;
+        transition: $--transition;
+      }
+    }
+  }
+  button {
+    display: none;
+  }
   .content {
     padding: 5px;
     margin: 10px;

@@ -2,9 +2,7 @@ import expenseApi from '@/api/expense'
 
 const state = {
   isSubmitting: false,
-  validationErrors: null,
-  isLoading: false,
-  expense: null
+  validationErrors: null
 }
 
 export const mutationTypes = {
@@ -12,14 +10,14 @@ export const mutationTypes = {
   editExpenseSuccess: '[editExpense] Edit expense success',
   editExpenseFailure: '[editExpense] Edit expense failure',
 
-  getExpenseStart: '[editExpense] Get expense start',
-  getExpenseSuccess: '[editExpense] Get expense success',
-  getExpenseFailure: '[editxpense] Get expense failure'
+  deleteExpenseStart: '[editExpense] Delete expense start',
+  deleteExpenseSuccess: '[editExpense] Delete expense success',
+  deleteExpenseFailure: '[deleteExpense] Delete expense failure'
 }
 
 export const actionTypes = {
   editExpense: '[editExpense] Edit expense',
-  getExpense: '[editExpense] Get expense'
+  deleteExpense: '[deleteExpense] Delete expense'
 }
 
 const mutations = {
@@ -33,14 +31,15 @@ const mutations = {
     state.isSubmitting = false
     state.validationErrors = payload
   },
-  [mutationTypes.getExpenseStart](state) {
-    state.isLoading = true
+  [mutationTypes.deleteExpenseStart](state) {
+    state.isSubmitting = true
   },
-  [mutationTypes.getExpenseSuccess](state, payload) {
-    state.expense = payload
+  [mutationTypes.deleteExpenseSuccess](state) {
+    state.isSubmitting = false
   },
-  [mutationTypes.getExpenseFailure](state) {
-    state.isLoading = false
+  [mutationTypes.deleteExpenseFailure](state, payload) {
+    state.isSubmitting = false
+    state.validationErrors = payload
   }
 }
 
@@ -55,21 +54,21 @@ const actions = {
           resolve(expense.data)
         })
         .catch(result => {
-          context.commit(mutationTypes.editExpenseFailure, result.response.data)
+          context.commit(mutationTypes.editExpenseFailure, result.data)
         })
     })
   },
-  [actionTypes.getExpense](context, {slug}) {
+  [actionTypes.deleteExpense](context, {slug}) {
     return new Promise(resolve => {
-      context.commit(mutationTypes.getExpenseStart)
+      context.commit(mutationTypes.deleteExpenseStart, slug)
       expenseApi
-        .getExpense(slug)
-        .then(expense => {
-          context.commit(mutationTypes.getExpenseSuccess, expense.data)
-          resolve(expense.data)
+        .deleteExpense(slug)
+        .then(() => {
+          context.commit(mutationTypes.deleteExpenseSuccess)
+          resolve()
         })
-        .catch(() => {
-          context.commit(mutationTypes.getExpenseFailure)
+        .catch(result => {
+          context.commit(mutationTypes.deleteExpenseFailure, result)
         })
     })
   }

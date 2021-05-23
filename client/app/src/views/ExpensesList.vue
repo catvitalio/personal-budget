@@ -21,8 +21,9 @@
       </transition>
       <div class="cards-list">
         <div v-for="expense in expenses" :key="expense">
-          <div class="card" @click="clickExpense(expense)">
-            <div class="content">
+          <div class="card">
+            <button @click="deleteExpense(expense.id)">✕</button>
+            <div class="content" @click="clickExpense(expense)">
               <h3>{{ expense.date }}</h3>
               <h1>{{ expense.category.name }}</h1>
               <h2>{{ expense.value }}</h2>
@@ -48,6 +49,7 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/expensesList'
+import {actionTypes as editExpenseActionTypes} from '@/store/modules/editExpense'
 import AppPagination from '@/components/Pagination'
 import AppLoading from '@/components/Loading'
 import AppCreateExpense from '@/components/CreateExpense'
@@ -104,6 +106,16 @@ export default {
         this.editExpense = expenseItem
       }
       this.createForm = false
+    },
+    deleteExpense(expenseId) {
+      this.$store
+        .dispatch(editExpenseActionTypes.deleteExpense, {
+          slug: expenseId
+        })
+        .then(() => {
+          this.fetchExpenses(this.startPage)
+          this.editForm = false
+        })
     }
   }
 }
