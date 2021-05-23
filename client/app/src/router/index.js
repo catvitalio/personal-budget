@@ -3,8 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
-import Expense from '@/views/Expense'
-import EditExpense from '@/views/EditExpense'
 import ExpensesList from '@/views/ExpensesList'
 
 Vue.use(VueRouter)
@@ -24,16 +22,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
-  },
-  {
-    path: '/expenses/:slug',
-    name: 'expense',
-    component: Expense
-  },
-  {
-    path: '/expenses/:slug/edit',
-    name: 'editExpense',
-    component: EditExpense
   },
   {
     path: '/expenses',
