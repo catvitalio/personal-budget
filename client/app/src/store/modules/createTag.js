@@ -21,7 +21,7 @@ export const getterTypes = {
 }
 
 const getters = {
-  [getterTypes.tagId]: state => {
+  [getterTypes.tag]: state => {
     return state.tag
   }
 }

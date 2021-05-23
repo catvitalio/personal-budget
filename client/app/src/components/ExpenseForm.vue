@@ -27,7 +27,10 @@
         <input type="number" placeholder="Значение" v-model="value" />
       </fieldset>
       <fieldset class="default-fieldset">
-        <dateselect v-model="date" :inputAttributes="{size: 50}" />
+        <dateselect
+          v-model="date"
+          :inputAttributes="{size: 50, placeholder: 'Дата'}"
+        />
       </fieldset>
       <fieldset class="multiselect-fieldset">
         <div class="multiselect-form">
@@ -76,11 +79,6 @@ export default {
     AppValidationErrors,
     Multiselect
   },
-  computed: {
-    ...mapGetters({
-      tag: [getterTypes].tag
-    })
-  },
   props: {
     initialValues: {
       type: Object,
@@ -108,6 +106,11 @@ export default {
       tagsList: []
     }
   },
+  computed: {
+    ...mapGetters({
+      tag: getterTypes.tag
+    })
+  },
   mounted() {
     expenseApi.getBudgetsList().then(response => {
       this.budgetsList = response.data
@@ -116,6 +119,7 @@ export default {
       this.categoriesList = response.data
     })
     this.fetchTags()
+    this.getNowDate()
   },
   methods: {
     addTag(newTag) {
@@ -141,6 +145,11 @@ export default {
       expenseApi.getTagsList().then(response => {
         this.tagsList = response.data
       })
+    },
+    getNowDate() {
+      if (this.initialValues.date === '') {
+        this.date = new Date(Date.now()).toISOString().substring(0, 10)
+      }
     }
   }
 }
