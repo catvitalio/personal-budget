@@ -1,4 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.serializers import ValidationError
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
 from django.db.models import Q
 
 from budget.serializers import (
@@ -30,9 +33,18 @@ from budget.models import (
     Transfer
 )
 from budget.permissions import (
-    ObjectCreatorPermission, 
+    ObjectCreatorPermission,
     BudgetCreatorPermission,
-    TransferCreatorPermission,
+    TransferCreatorPermission
+)
+from budget.mixins import (
+    ObjectStatsViewSet,
+    ObjectTimePeriodStatsViewSetMixin
+)
+from budget.services import (
+    get_category_stats,
+    get_budget_stats,
+    get_tag_stats
 )
 
 
@@ -88,8 +100,8 @@ class ExpenseViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Expense.objects.filter(
-            Q(budget__creator=self.request.user) | 
-            Q(budget__creator=None)).order_by('-date')
+            budget__creator=self.request.user
+        ).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -123,8 +135,8 @@ class IncomeViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Income.objects.filter(
-            Q(budget__creator=self.request.user) | 
-            Q(budget__creator=None)).order_by('-date')
+            budget__creator=self.request.user
+        ).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -147,11 +159,49 @@ class TransferViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Transfer.objects.filter(
-                Q(budget_from__creator=self.request.user) | 
-                Q(budget_to__creator=self.request.user)).order_by('-date')
+            budget_from__creator=self.request.user
+        ).order_by('-date')
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
             return TransferDetailSerializer
         else:
             return TransferSerializer
+
+
+class ExpenseStatsViewSet(ViewSet, ObjectTimePeriodStatsViewSetMixin):
+    model = Expense
+
+
+class ExpenseCategoryStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Expense
+    service = get_category_stats
+
+
+class ExpenseBudgetStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Expense
+    service = get_budget_stats
+
+
+class ExpenseTagStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Expense
+    service = get_tag_stats
+
+
+class IncomeStatsViewSet(ViewSet, ObjectTimePeriodStatsViewSetMixin):
+    model = Income
+
+
+class IncomeCategoryStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Income
+    service = get_category_stats
+
+
+class IncomeBudgetStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Income
+    service = get_budget_stats
+
+
+class IncomeTagStatsViewSet(ViewSet, ObjectStatsViewSet):
+    model = Income
+    service = get_tag_stats

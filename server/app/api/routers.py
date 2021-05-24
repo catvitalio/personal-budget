@@ -11,7 +11,16 @@ from budget.viewsets import (
     IncomeCategoryViewSet,
     IncomeViewSet,
     TransferTagViewSet,
-    TransferViewSet
+    TransferViewSet,
+    ExpenseStatsViewSet,
+    ExpenseCategoryStatsViewSet,
+    ExpenseTagStatsViewSet,
+    ExpenseBudgetStatsViewSet,
+    IncomeStatsViewSet,
+    IncomeCategoryStatsViewSet,
+    IncomeTagStatsViewSet,
+    IncomeBudgetStatsViewSet,
+    IncomeTagStatsViewSet
 )
 
 
@@ -28,3 +37,11 @@ router.register('income_category', IncomeCategoryViewSet, basename='income_categ
 router.register('income_tag', IncomeTagViewSet, basename="income_tags")
 router.register('transfer', TransferViewSet, basename='transfers')
 router.register('transfer_tag', IncomeTagViewSet, basename="transfer_tags")
+router.register('expense_stats', ExpenseStatsViewSet, basename="expense_stats")
+router.register('expense_category_stats', ExpenseCategoryStatsViewSet, basename="expense_category_stats")
+router.register('expense_budget_stats',ExpenseBudgetStatsViewSet, basename='expense_budget_stats')
+router.register('expense_tag_stats', ExpenseTagStatsViewSet, basename="expense_tag_stats")
+router.register('income_stats', IncomeStatsViewSet, basename="income_stats")
+router.register('income_category_stats', IncomeCategoryStatsViewSet, basename="income_category_stats")
+router.register('income_budget_stats', IncomeBudgetStatsViewSet, basename='income_budget_stats')
+router.register('income_tag_stats', IncomeTagStatsViewSet, basename="income_tag_stats")

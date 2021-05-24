@@ -76,9 +76,6 @@ class Expense(models.Model):
     tags = models.ManyToManyField(ExpenseTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
 
-    def __str__(self):
-        return self.value
-
 
 class IncomeTag(models.Model):
     name = models.CharField(max_length=255)
@@ -121,9 +118,6 @@ class Income(models.Model):
     tags = models.ManyToManyField(IncomeTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget'])
 
-    def __str__(self):
-        return self.value
-
 
 class TransferTag(models.Model):
     name = models.CharField(max_length=255)
@@ -154,6 +148,3 @@ class Transfer(models.Model):
     date = models.DateField()
     tags = models.ManyToManyField(TransferTag, blank=True)
     tracker = FieldTracker(fields=['value', 'budget_from', 'budget_to'])
-
-    def __str__(self):
-        return self.value
