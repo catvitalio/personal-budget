@@ -28,6 +28,7 @@ def get_stats_for_month(queryset, month):
     stats = [0] * 31
     for item in data:
         stats[int(item.date.strftime('%Y-%m-%d')[8:10])-1] += item.value
+    days = [int(day) for day in days]
     return dict(zip(days, stats))
 
 
