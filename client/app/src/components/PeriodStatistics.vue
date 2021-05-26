@@ -1,14 +1,28 @@
 <template>
   <div>
-    <div class="period-select-form">
+    <div class="bar select-form">
       <h1>Статистика за период</h1>
-      <group class="period-choice">
-        <div class="period-item">
+      <group class="bar choice">
+        <div class="bar choice-item">
+          <input type="radio" id="line" value="line" v-model="chartType" />
+          <label for="line">График</label>
+          <br />
+        </div>
+        <div class="bar choice-item">
+          <input type="radio" id="bar" value="bar" v-model="chartType" />
+          <label for="bar">Диаграмма</label>
+          <br />
+        </div>
+      </group>
+    </div>
+    <div class="period select-form">
+      <group class="period choice">
+        <div class="period choice-item">
           <input type="radio" id="year" value="?year=" v-model="period" />
           <label for="year">Год</label>
           <br />
         </div>
-        <div class="period-item">
+        <div class="period choice-item">
           <input type="radio" id="month" value="?month=" v-model="period" />
           <label for="month">Месяц</label>
           <br />
@@ -33,7 +47,8 @@
     <transition name="slide">
       <div v-if="expensesStats && incomesStats">
         <div v-if="data">
-          <line-chart :chartData="data" />
+          <line-chart v-if="chartType == 'line'" :chartData="data" />
+          <bar-chart v-if="chartType == 'bar'" :chartData="data" />
         </div>
       </div>
     </transition>
@@ -43,8 +58,9 @@
 <script>
 import {mapState} from 'vuex'
 import Multiselect from 'vue-multiselect'
-
 import LineChart from './chart.js/LineChart'
+import BarChart from './chart.js/BarChart'
+
 import AppLoading from '@/components/Loading'
 import {nowDate} from '@/helpers/utils'
 import {actionTypes as expensesActionTypes} from '@/store/modules/expensesPeriodStats'
@@ -55,10 +71,12 @@ export default {
   components: {
     AppLoading,
     LineChart,
+    BarChart,
     Multiselect
   },
   data() {
     return {
+      chartType: 'line',
       period: '?year=',
       year: nowDate().substring(0, 4),
       month: {name: '', value: ''},

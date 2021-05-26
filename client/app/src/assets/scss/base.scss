@@ -277,11 +277,11 @@ fieldset {
 }
 
 // statistics
-.period-choice {
+.choice {
   display: inline;
   overflow: hidden;
 
-  .period-item {
+  .choice-item {
     display: inline-block;
     &:first-child label {
       border-radius: 5px 0 0 5px;
@@ -347,8 +347,8 @@ fieldset {
   max-width: 150px;
 }
 
-.period-select-form {
+.select-form {
   align-items: center;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
