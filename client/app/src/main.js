@@ -14,6 +14,7 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 Vue.component('dateselect', DatePick)
+Vue.component('')
 
 var filter = function(text, length, clamp) {
   clamp = clamp || '...'

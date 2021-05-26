@@ -1,9 +1,14 @@
-<template
-  ><div><h1>STATS</h1></div></template
->
+<template>
+  <div>
+    <app-period-statistics />
+  </div>
+</template>
 
 <script>
+import AppPeriodStatistics from '@/components/PeriodStatistics'
+
 export default {
-  name: 'AppStatistics'
+  name: 'AppStatistics',
+  components: {AppPeriodStatistics}
 }
 </script>

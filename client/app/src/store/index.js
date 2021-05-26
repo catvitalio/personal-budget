@@ -6,6 +6,8 @@ import expensesList from '@/store/modules/expensesList'
 import createExpense from '@/store/modules/createExpense'
 import editExpense from '@/store/modules/editExpense'
 import createTag from '@/store/modules/createTag'
+import expensesPeriodStats from '@/store/modules/expensesPeriodStats'
+import incomesPeriodStats from '@/store/modules/incomesPeriodStats'
 
 Vue.use(Vuex)
 
@@ -18,6 +20,8 @@ export default new Vuex.Store({
     expensesList,
     createExpense,
     editExpense,
-    createTag
+    createTag,
+    expensesPeriodStats,
+    incomesPeriodStats
   }
 })

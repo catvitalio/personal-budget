@@ -35,9 +35,7 @@ export default {
   computed: {
     ...mapState({
       isSubmitting: state => state.editExpense.isSubmitting,
-      validationErrors: state => state.editExpense.validationErrors,
-      isLoading: state => state.editExpense.isLoading,
-      expense: state => state.editExpense.expense
+      validationErrors: state => state.editExpense.validationErrors
     })
   },
   data() {
