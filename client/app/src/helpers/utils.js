@@ -13,7 +13,7 @@ export const getRandomColor = data => {
   return data.map(() => {
     var h = randomInt(0, 360)
     var s = randomInt(42, 98)
-    var l = randomInt(40, 90)
+    var l = 60
     return `hsl(${h},${s}%,${l}%)`
   })
 }

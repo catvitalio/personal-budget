@@ -45,20 +45,26 @@
         track-by="value"
         placeholder="Месяц"
       ></multiselect>
+
+      <app-loading v-if="expensesIsLoading || incomesIsLoading" />
+      <transition name="slide">
+        <div v-if="expensesStats && incomesStats">
+          <div v-if="objectNotEmpty(expensesStats)">
+            <h2>Расходы:</h2>
+            <line-chart v-if="chartType == 'line'" :chartData="expensesData" />
+            <bar-chart v-if="chartType == 'bar'" :chartData="expensesData" />
+            <pie-chart v-if="chartType == 'pie'" :chartData="expensesData" />
+          </div>
+
+          <div v-if="objectNotEmpty(incomesStats)">
+            <h2>Доходы:</h2>
+            <line-chart v-if="chartType == 'line'" :chartData="incomesData" />
+            <bar-chart v-if="chartType == 'bar'" :chartData="incomesData" />
+            <pie-chart v-if="chartType == 'pie'" :chartData="incomesData" />
+          </div>
+        </div>
+      </transition>
     </div>
-
-    <app-loading v-if="expensesIsLoading || incomesIsLoading" />
-    <transition name="slide">
-      <div v-if="expensesStats && incomesStats">
-        <line-chart v-if="chartType == 'line'" :chartData="expensesData" />
-        <bar-chart v-if="chartType == 'bar'" :chartData="expensesData" />
-        <pie-chart v-if="chartType == 'pie'" :chartData="expensesData" />
-
-        <line-chart v-if="chartType == 'line'" :chartData="incomesData" />
-        <bar-chart v-if="chartType == 'bar'" :chartData="incomesData" />
-        <pie-chart v-if="chartType == 'pie'" :chartData="incomesData" />
-      </div>
-    </transition>
   </div>
 </template>
 
@@ -177,6 +183,9 @@ export default {
           `${this.period}${this.year}${this.month.value}`
         )
       }
+    },
+    objectNotEmpty(obj) {
+      return Object.keys(obj).length != 0
     }
   }
 }
