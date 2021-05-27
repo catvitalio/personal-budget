@@ -31,9 +31,14 @@
           <label for="month">Месяц</label>
           <br />
         </div>
+        <div class="period choice-item">
+          <input type="radio" id="day" value="?day=" v-model="period" />
+          <label for="day">День</label>
+          <br />
+        </div>
       </div>
 
-      <input class="year-input" v-model="year" placeholder="Год" />
+      <input class="year-input" v-model="year" placeholder="ГГГГ" />
       <multiselect
         v-if="month.value != ''"
         class="month-input"
@@ -43,8 +48,14 @@
         :searchable="false"
         :show-labels="false"
         track-by="value"
-        placeholder="Месяц"
+        placeholder="ММ"
       ></multiselect>
+      <input
+        v-if="day != ''"
+        class="day-input"
+        v-model="day"
+        placeholder="ДД"
+      />
 
       <app-loading v-if="expensesIsLoading || incomesIsLoading" />
       <transition name="slide">
@@ -109,17 +120,32 @@ export default {
         {name: 'Октябрь', value: '-10'},
         {name: 'Ноябрь', value: '-11'},
         {name: 'Декабрь', value: '-12'}
-      ]
+      ],
+      day: '',
+      dashDay: ''
     }
   },
   watch: {
     period() {
-      if (this.period === '?year=') this.month.value = ''
+      if (this.period === '?year=') {
+        this.month.value = ''
+        this.day = ''
+        this.dashDay = ''
+      }
       if (this.period === '?month=') {
+        this.day = ''
+        this.dashDay = ''
         this.month.value = nowDate().substring(4, 7)
         this.month.name = this.monthList.filter(
           obj => obj.value == this.month.value
         )[0].name
+      }
+      if (this.period === '?day=') {
+        this.month.value = nowDate().substring(4, 7)
+        this.month.name = this.monthList.filter(
+          obj => obj.value == this.month.value
+        )[0].name
+        this.day = nowDate().substring(8, 10)
       }
       this.fetchExpenses()
       this.fetchIncomes()
@@ -131,6 +157,11 @@ export default {
       console.log(this.expensesStats)
     },
     month() {
+      this.fetchExpenses()
+      this.fetchIncomes()
+    },
+    day() {
+      this.dashDay = '-' + ('0' + this.day).slice(-2)
       this.fetchExpenses()
       this.fetchIncomes()
     }
@@ -171,18 +202,18 @@ export default {
   },
   methods: {
     fetchExpenses() {
-      if (this.year.length == 4) {
+      if (this.year.length == 4 && this.day.length < 3) {
         this.$store.dispatch(
           expensesActionTypes.getExpensesCategoriesStats,
-          `${this.period}${this.year}${this.month.value}`
+          `${this.period}${this.year}${this.month.value}${this.dashDay}`
         )
       }
     },
     fetchIncomes() {
-      if (this.year.length == 4) {
+      if (this.year.length == 4 && this.day.length < 3) {
         this.$store.dispatch(
           incomesActionTypes.getIncomesCategoriesStats,
-          `${this.period}${this.year}${this.month.value}`
+          `${this.period}${this.year}${this.month.value}${this.dashDay}`
         )
       }
     },

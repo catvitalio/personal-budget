@@ -347,6 +347,11 @@ fieldset {
   max-width: 150px;
 }
 
+.day-input {
+  @extend .year-input;
+  width: 43px;
+}
+
 .select-form {
   align-items: center;
   text-align: center;
