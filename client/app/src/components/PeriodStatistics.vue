@@ -128,12 +128,12 @@ export default {
       const datasets = [
         {
           label: 'Расходы',
-          backgroundColor: '#f55c47',
+          backgroundColor: '#dc3912',
           data: Object.values(this.expensesStats)
         },
         {
           label: 'Доходы',
-          backgroundColor: '#87cefa',
+          backgroundColor: '#3366cc',
           data: Object.values(this.incomesStats)
         }
       ]

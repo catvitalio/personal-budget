@@ -88,7 +88,7 @@ import PieChart from './chart.js/PieChart'
 
 import AppLoading from '@/components/Loading'
 import {nowDate} from '@/helpers/utils'
-import {getRandomColor} from '@/helpers/utils'
+import {getColors} from '@/helpers/utils'
 import {actionTypes as expensesActionTypes} from '@/store/modules/expensesCategoriesStats'
 import {actionTypes as incomesActionTypes} from '@/store/modules/incomesCategoriesStats'
 
@@ -178,7 +178,7 @@ export default {
         {
           label: 'Расходы',
           data: Object.values(this.expensesStats),
-          backgroundColor: getRandomColor(Object.values(this.expensesStats))
+          backgroundColor: getColors(Object.values(this.expensesStats))
         }
       ]
       return {labels: labels, datasets: datasets}
@@ -189,7 +189,7 @@ export default {
         {
           label: 'Доходы',
           data: Object.values(this.incomesStats),
-          backgroundColor: getRandomColor(Object.values(this.expensesStats))
+          backgroundColor: getColors(Object.values(this.expensesStats))
         }
       ]
       return {labels: labels, datasets: datasets}
