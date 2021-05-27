@@ -12,11 +12,6 @@
           <label for="bar">Диаграмма</label>
           <br />
         </div>
-        <div class="bar choice-item">
-          <input type="radio" id="line" value="line" v-model="chartType" />
-          <label for="line">График</label>
-          <br />
-        </div>
       </div>
     </div>
     <div class="period select-form">
@@ -62,14 +57,12 @@
         <div v-if="expensesStats && incomesStats">
           <div v-if="objectNotEmpty(expensesStats)">
             <h2>Расходы:</h2>
-            <line-chart v-if="chartType == 'line'" :chartData="expensesData" />
             <bar-chart v-if="chartType == 'bar'" :chartData="expensesData" />
             <pie-chart v-if="chartType == 'pie'" :chartData="expensesData" />
           </div>
 
           <div v-if="objectNotEmpty(incomesStats)">
             <h2>Доходы:</h2>
-            <line-chart v-if="chartType == 'line'" :chartData="incomesData" />
             <bar-chart v-if="chartType == 'bar'" :chartData="incomesData" />
             <pie-chart v-if="chartType == 'pie'" :chartData="incomesData" />
           </div>
@@ -82,7 +75,6 @@
 <script>
 import {mapState} from 'vuex'
 import Multiselect from 'vue-multiselect'
-import LineChart from './chart.js/LineChart'
 import BarChart from './chart.js/BarChart'
 import PieChart from './chart.js/PieChart'
 
@@ -96,7 +88,6 @@ export default {
   name: 'AppTagsStatistics',
   components: {
     AppLoading,
-    LineChart,
     BarChart,
     PieChart,
     Multiselect
