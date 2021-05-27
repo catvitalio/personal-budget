@@ -57,13 +57,21 @@
         <div v-if="expensesStats && incomesStats">
           <div v-if="objectNotEmpty(expensesStats)">
             <h2>Расходы:</h2>
-            <bar-chart v-if="chartType == 'bar'" :chartData="expensesData" />
+            <bar-chart
+              v-if="chartType == 'bar'"
+              :chartData="expensesData"
+              :options="{legend: {display: false}}"
+            />
             <pie-chart v-if="chartType == 'pie'" :chartData="expensesData" />
           </div>
 
           <div v-if="objectNotEmpty(incomesStats)">
             <h2>Доходы:</h2>
-            <bar-chart v-if="chartType == 'bar'" :chartData="incomesData" />
+            <bar-chart
+              v-if="chartType == 'bar'"
+              :chartData="incomesData"
+              :options="{legend: {display: false}}"
+            />
             <pie-chart v-if="chartType == 'pie'" :chartData="incomesData" />
           </div>
         </div>
