@@ -51,7 +51,7 @@
         placeholder="ММ"
       ></multiselect>
       <input
-        v-if="day != ''"
+        v-if="period == '?day='"
         class="day-input"
         v-model="day"
         placeholder="ДД"
