@@ -1,9 +1,14 @@
 <template>
   <nav>
     <ul class="navbar">
-      <li>
+      <li v-if="isAnonymous">
         <router-link :to="{name: 'home'}" active-class="active" exact
-          >PB</router-link
+          >PERSONAL BUDGET</router-link
+        >
+      </li>
+      <li v-if="isLoggedIn">
+        <router-link :to="{name: 'home'}" active-class="active" exact
+          >СТАТ</router-link
         >
       </li>
       <li v-if="isLoggedIn">
@@ -28,12 +33,12 @@
       </li>
       <li v-if="isAnonymous">
         <router-link :to="{name: 'login'}" active-class="active"
-          >Войти</router-link
+          >ВОЙТИ</router-link
         >
       </li>
       <li v-if="isAnonymous">
         <router-link :to="{name: 'register'}" active-class="active"
-          >Зарегистрироваться</router-link
+          >ЗАРЕГИСТРИРОВАТЬСЯ</router-link
         >
       </li>
       <li v-if="isLoggedIn">

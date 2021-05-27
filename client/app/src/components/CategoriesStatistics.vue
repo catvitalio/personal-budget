@@ -3,13 +3,18 @@
     <div class="bar select-form">
       <div class="bar choice">
         <div class="bar choice-item">
-          <input type="radio" id="line" value="line" v-model="chartType" />
-          <label for="line">График</label>
+          <input type="radio" id="pie" value="pie" v-model="chartType" />
+          <label for="pie">Круг</label>
           <br />
         </div>
         <div class="bar choice-item">
           <input type="radio" id="bar" value="bar" v-model="chartType" />
           <label for="bar">Диаграмма</label>
+          <br />
+        </div>
+        <div class="bar choice-item">
+          <input type="radio" id="line" value="line" v-model="chartType" />
+          <label for="line">График</label>
           <br />
         </div>
       </div>
@@ -45,10 +50,13 @@
     <app-loading v-if="expensesIsLoading || incomesIsLoading" />
     <transition name="slide">
       <div v-if="expensesStats && incomesStats">
-        <div v-if="data">
-          <line-chart v-if="chartType == 'line'" :chartData="data" />
-          <bar-chart v-if="chartType == 'bar'" :chartData="data" />
-        </div>
+        <line-chart v-if="chartType == 'line'" :chartData="expensesData" />
+        <bar-chart v-if="chartType == 'bar'" :chartData="expensesData" />
+        <pie-chart v-if="chartType == 'pie'" :chartData="expensesData" />
+
+        <line-chart v-if="chartType == 'line'" :chartData="incomesData" />
+        <bar-chart v-if="chartType == 'bar'" :chartData="incomesData" />
+        <pie-chart v-if="chartType == 'pie'" :chartData="incomesData" />
       </div>
     </transition>
   </div>
@@ -59,23 +67,26 @@ import {mapState} from 'vuex'
 import Multiselect from 'vue-multiselect'
 import LineChart from './chart.js/LineChart'
 import BarChart from './chart.js/BarChart'
+import PieChart from './chart.js/PieChart'
 
 import AppLoading from '@/components/Loading'
 import {nowDate} from '@/helpers/utils'
-import {actionTypes as expensesActionTypes} from '@/store/modules/expensesPeriodStats'
-import {actionTypes as incomesActionTypes} from '@/store/modules/incomesPeriodStats'
+import {getRandomColor} from '@/helpers/utils'
+import {actionTypes as expensesActionTypes} from '@/store/modules/expensesCategoriesStats'
+import {actionTypes as incomesActionTypes} from '@/store/modules/incomesCategoriesStats'
 
 export default {
-  name: 'AppPeriodStatistics',
+  name: 'AppCategoriesStatistics',
   components: {
     AppLoading,
     LineChart,
     BarChart,
+    PieChart,
     Multiselect
   },
   data() {
     return {
-      chartType: 'line',
+      chartType: 'pie',
       period: '?year=',
       year: nowDate().substring(0, 4),
       month: {name: '', value: ''},
@@ -118,23 +129,29 @@ export default {
   },
   computed: {
     ...mapState({
-      expensesIsLoading: state => state.expensesPeriodStats.isLoading,
-      expensesStats: state => state.expensesPeriodStats.data,
-      incomesIsLoading: state => state.incomesPeriodStats.isLoading,
-      incomesStats: state => state.incomesPeriodStats.data
+      expensesIsLoading: state => state.expensesCategoriesStats.isLoading,
+      expensesStats: state => state.expensesCategoriesStats.data,
+      incomesIsLoading: state => state.incomesCategoriesStats.isLoading,
+      incomesStats: state => state.incomesCategoriesStats.data
     }),
-    data() {
+    expensesData() {
       const labels = Object.keys(this.expensesStats)
       const datasets = [
         {
           label: 'Расходы',
-          backgroundColor: '#f55c47',
-          data: Object.values(this.expensesStats)
-        },
+          data: Object.values(this.expensesStats),
+          backgroundColor: getRandomColor(Object.values(this.expensesStats))
+        }
+      ]
+      return {labels: labels, datasets: datasets}
+    },
+    incomesData() {
+      const labels = Object.keys(this.incomesStats)
+      const datasets = [
         {
           label: 'Доходы',
-          backgroundColor: '#87cefa',
-          data: Object.values(this.incomesStats)
+          data: Object.values(this.incomesStats),
+          backgroundColor: getRandomColor(Object.values(this.expensesStats))
         }
       ]
       return {labels: labels, datasets: datasets}
@@ -148,7 +165,7 @@ export default {
     fetchExpenses() {
       if (this.year.length == 4) {
         this.$store.dispatch(
-          expensesActionTypes.getExpensesPeriodStats,
+          expensesActionTypes.getExpensesCategoriesStats,
           `${this.period}${this.year}${this.month.value}`
         )
       }
@@ -156,7 +173,7 @@ export default {
     fetchIncomes() {
       if (this.year.length == 4) {
         this.$store.dispatch(
-          incomesActionTypes.getIncomesPeriodStats,
+          incomesActionTypes.getIncomesCategoriesStats,
           `${this.period}${this.year}${this.month.value}`
         )
       }
