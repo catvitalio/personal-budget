@@ -32,6 +32,12 @@ def get_stats_for_month(queryset, month):
     return dict(zip(days, stats))
 
 
+def dict_sort(dictionary):
+    return {k: v for k, v in sorted(
+        dictionary.items(), key=lambda item: item[1], reverse=True
+    )}
+
+
 def get_category_stats(self, queryset, year_month_or_day):
     # get stats for categories
     data = queryset.filter(date__contains=year_month_or_day)
@@ -40,7 +46,7 @@ def get_category_stats(self, queryset, year_month_or_day):
     for item in data:
         if item.category.name in categories:
             stats[categories.index(item.category.name)] += item.value
-    return dict(zip(categories, stats))
+    return dict_sort(dict(zip(categories, stats)))
 
 
 def get_budget_stats(self, queryset, year_month_or_day):
@@ -51,7 +57,7 @@ def get_budget_stats(self, queryset, year_month_or_day):
     for item in data:
         if item.budget.name in budgets:
             stats[budgets.index(item.budget.name)] += item.value
-    return dict(zip(budgets, stats))
+    return dict_sort(dict(zip(budgets, stats)))
 
 
 def get_tag_stats(self, queryset, year_month_or_day):
@@ -67,4 +73,4 @@ def get_tag_stats(self, queryset, year_month_or_day):
         for tag in item.tags.all():
             if tag.name in tags:
                 stats[tags.index(tag.name)] += item.value
-    return dict(zip(tags, stats))
+    return dict_sort(dict(zip(tags, stats)))
