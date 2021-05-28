@@ -2,12 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import auth from '@/store/modules/auth'
+import budgetsList from '@/store/modules/budgetsList'
 import expensesList from '@/store/modules/expensesList'
 import incomesList from '@/store/modules/incomesList'
 import transfersList from '@/store/modules/transfersList'
+import createBudget from '@/store/modules/createBudget'
 import createExpense from '@/store/modules/createExpense'
 import createIncome from '@/store/modules/createIncome'
 import createTransfer from '@/store/modules/createTransfer'
+import editBudget from '@/store/modules/editBudget'
 import editExpense from '@/store/modules/editExpense'
 import editIncome from '@/store/modules/editIncome'
 import editTransfer from '@/store/modules/editTransfer'
@@ -31,12 +34,15 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     auth,
+    budgetsList,
     expensesList,
     incomesList,
     transfersList,
+    createBudget,
     createExpense,
     createIncome,
     createTransfer,
+    editBudget,
     editExpense,
     editIncome,
     editTransfer,

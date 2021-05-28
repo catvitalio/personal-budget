@@ -12,12 +12,12 @@ export const mutationTypes = {
 
   deleteIncomeStart: '[editIncome] Delete income start',
   deleteIncomeSuccess: '[editIncome] Delete income success',
-  deleteIncomeFailure: '[deleteIncome] Delete income failure'
+  deleteIncomeFailure: '[editIncome] Delete income failure'
 }
 
 export const actionTypes = {
   editIncome: '[editIncome] Edit income',
-  deleteIncome: '[deleteIncome] Delete income'
+  deleteIncome: '[editIncome] Delete income'
 }
 
 const mutations = {

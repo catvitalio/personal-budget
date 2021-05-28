@@ -12,12 +12,12 @@ export const mutationTypes = {
 
   deleteExpenseStart: '[editExpense] Delete expense start',
   deleteExpenseSuccess: '[editExpense] Delete expense success',
-  deleteExpenseFailure: '[deleteExpense] Delete expense failure'
+  deleteExpenseFailure: '[editExpense] Delete expense failure'
 }
 
 export const actionTypes = {
   editExpense: '[editExpense] Edit expense',
-  deleteExpense: '[deleteExpense] Delete expense'
+  deleteExpense: '[editExpense] Delete expense'
 }
 
 const mutations = {

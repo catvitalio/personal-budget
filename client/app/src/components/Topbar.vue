@@ -12,7 +12,7 @@
         >
       </li>
       <li v-if="isLoggedIn">
-        <router-link :to="{name: 'sourcesList'}" active-class="active"
+        <router-link :to="{name: 'budgetsList'}" active-class="active"
           >СЧЕТА</router-link
         >
       </li>

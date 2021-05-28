@@ -9,7 +9,7 @@ const state = {
 export const mutationTypes = {
   getExpensesListStart: '[expensesList] Get expenses list start',
   getExpensesListSuccess: '[expensesList] Get expenses list success',
-  getExpensesListFailure: '[expenesesList] Get expenses list failure'
+  getExpensesListFailure: '[expensesList] Get expenses list failure'
 }
 
 export const actionTypes = {

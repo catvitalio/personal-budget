@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
+import BudgetsList from '@/views/BudgetsList'
 import ExpensesList from '@/views/ExpensesList'
 import IncomesList from '@/views/IncomesList'
 import TransfersList from '@/views/TransfersList'
@@ -36,8 +37,9 @@ const routes = [
     component: IncomesList
   },
   {
-    path: '/sources',
-    name: 'sourcesList'
+    path: '/budgets',
+    name: 'budgetsList',
+    component: BudgetsList
   },
   {
     path: '/transfers',

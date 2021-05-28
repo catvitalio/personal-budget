@@ -9,7 +9,7 @@ const state = {
 export const mutationTypes = {
   getIncomesListStart: '[incomesList] Get incomes list start',
   getIncomesListSuccess: '[incomesList] Get incomes list success',
-  getIncomesListFailure: '[expenesesList] Get incomes list failure'
+  getIncomesListFailure: '[incomesList] Get incomes list failure'
 }
 
 export const actionTypes = {
