@@ -5,6 +5,7 @@ import Register from '@/views/Register'
 import Login from '@/views/Login'
 import ExpensesList from '@/views/ExpensesList'
 import IncomesList from '@/views/IncomesList'
+import TransfersList from '@/views/TransfersList'
 
 Vue.use(VueRouter)
 
@@ -40,7 +41,8 @@ const routes = [
   },
   {
     path: '/transfers',
-    name: 'transfersList'
+    name: 'transfersList',
+    component: TransfersList
   }
 ]
 

@@ -45,23 +45,6 @@ const actions = {
           )
         })
     })
-  },
-  [actionTypes.createExpenseTag](context, tagInput) {
-    return new Promise(resolve => {
-      context.commit(mutationTypes.createExpenseTagStart, tagInput)
-      incomeApi
-        .createExpenseTag(tagInput)
-        .then(tag => {
-          context.commit(mutationTypes.createExpenseTagSuccess, tag.data)
-          resolve(tag.data)
-        })
-        .catch(result => {
-          context.commit(
-            mutationTypes.createExpenseTagFailure,
-            result.response.data
-          )
-        })
-    })
   }
 }
 

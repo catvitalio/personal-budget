@@ -46,9 +46,8 @@
             <button @click="deleteExpense(expense.id)">✕</button>
             <div class="content" @click="clickExpense(expense)">
               <h3>{{ expense.date }}</h3>
-              <h1>{{ expense.category.name }}</h1>
+              <h1>{{ expense.budget.name }} → {{ expense.category.name }}</h1>
               <p>
-                {{ expense.budget.name }}:
                 {{ expense.value }}
               </p>
               <span

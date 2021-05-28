@@ -1,11 +1,11 @@
 <template>
   <div class="page">
     <transition name="slide">
-      <app-create-income v-if="createForm" :show.sync="createForm" />
-      <app-edit-income
+      <app-create-transfer v-if="createForm" :show.sync="createForm" />
+      <app-edit-transfer
         v-if="editForm"
         :show.sync="editForm"
-        :initialValues="editIncome"
+        :initialValues="editTransfer"
       />
     </transition>
     <transition name="slide">
@@ -19,12 +19,7 @@
     </transition>
     <div class="buttons-list">
       <button>
-        <router-link :to="{name: 'incomesCategoriesList'}" exact
-          >Категории</router-link
-        >
-      </button>
-      <button>
-        <router-link :to="{name: 'incomesTagsList'}" exact>Теги</router-link>
+        <router-link :to="{name: 'transfersTagsList'}" exact>Теги</router-link>
       </button>
       <multiselect
         class="sort-choice"
@@ -39,19 +34,21 @@
     </div>
     <input class="search-field" v-model="search" placeholder="Поиск" />
     <app-loading v-if="isLoading" />
-    <div v-if="incomes">
+    <div v-if="transfers">
       <div class="cards-list">
-        <div v-for="income in incomes" :key="income">
+        <div v-for="transfer in transfers" :key="transfer">
           <div class="card">
-            <button @click="deleteIncome(income.id)">✕</button>
-            <div class="content" @click="clickIncome(income)">
-              <h3>{{ income.date }}</h3>
-              <h1>{{ income.category.name }} → {{ income.budget.name }}</h1>
+            <button @click="deleteTransfer(transfer.id)">✕</button>
+            <div class="content" @click="clickTransfer(transfer)">
+              <h3>{{ transfer.date }}</h3>
+              <h1>
+                {{ transfer.budget_from.name }} → {{ transfer.budget_to.name }}
+              </h1>
               <p>
-                {{ income.value }}
+                {{ transfer.value }}
               </p>
               <span
-                v-for="tag in income.tags.map(tag => tag.name)"
+                v-for="tag in transfer.tags.map(tag => tag.name)"
                 :key="tag"
                 >{{ tag }}</span
               >
@@ -66,7 +63,7 @@
           :hasNextPage="hasNextPage"
           :hasPrevPage="hasPrevPage"
           :total="total"
-          @currentPage="fetchIncomes"
+          @currentPage="fetchTransfers"
         />
       </transition>
     </div>
@@ -76,20 +73,20 @@
 <script>
 import {mapState} from 'vuex'
 import Multiselect from 'vue-multiselect'
-import {actionTypes} from '@/store/modules/incomesList'
-import {actionTypes as editIncomeActionTypes} from '@/store/modules/editIncome'
+import {actionTypes} from '@/store/modules/transfersList'
+import {actionTypes as editTransferActionTypes} from '@/store/modules/editTransfer'
 import AppPagination from '@/components/Pagination'
 import AppLoading from '@/components/Loading'
-import AppCreateIncome from '@/components/CreateIncome'
-import AppEditIncome from '@/components/EditIncome'
+import AppCreateTransfer from '@/components/CreateTransfer'
+import AppEditTransfer from '@/components/EditTransfer'
 
 export default {
-  name: 'AppIncomesList',
+  name: 'AppTransfersList',
   components: {
     AppPagination,
     AppLoading,
-    AppCreateIncome,
-    AppEditIncome,
+    AppCreateTransfer,
+    AppEditTransfer,
     Multiselect
   },
   data() {
@@ -97,15 +94,15 @@ export default {
       startPage: 1,
       createForm: false,
       editForm: false,
-      editIncome: null,
+      editTransfer: null,
       sortBy: {name: 'По дате ↑', value: '-date'},
       sortItemsList: [
         {name: 'По дате ↑', value: '-date'},
         {name: 'По дате ↓', value: 'date'},
-        {name: 'По категориям ↑', value: '-category'},
-        {name: 'По категориям ↓', value: 'category'},
-        {name: 'По счету ↑', value: '-budget'},
-        {name: 'По счету ↓', value: 'budget'},
+        {name: 'По источникам ↑', value: '-budget_from'},
+        {name: 'По источникам ↓', value: 'budget_from'},
+        {name: 'По получателям ↑', value: '-budget_to'},
+        {name: 'По получателям ↓', value: 'budget_to'},
         {name: 'По значению ↑', value: '-value'},
         {name: 'По значению ↓', value: 'value'},
         {name: 'По тегам ↑', value: '-tags'},
@@ -116,57 +113,57 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoading: state => state.incomesList.isLoading,
-      incomes: state => state.incomesList.data.results,
-      error: state => state.incomesList.error,
-      total: state => state.incomesList.data.count,
-      hasNextPage: state => Boolean(state.incomesList.data.next),
-      hasPrevPage: state => Boolean(state.incomesList.data.previous)
+      isLoading: state => state.transfersList.isLoading,
+      transfers: state => state.transfersList.data.results,
+      error: state => state.transfersList.error,
+      total: state => state.transfersList.data.count,
+      hasNextPage: state => Boolean(state.transfersList.data.next),
+      hasPrevPage: state => Boolean(state.transfersList.data.previous)
     })
   },
   watch: {
     createForm() {
-      this.fetchIncomes(this.startPage)
+      this.fetchTransfers(this.startPage)
     },
     editForm() {
-      this.fetchIncomes(this.startPage)
+      this.fetchTransfers(this.startPage)
     },
     sortBy() {
-      this.fetchIncomes(this.startPage)
+      this.fetchTransfers(this.startPage)
     },
     search() {
-      this.fetchIncomes(this.startPage)
+      this.fetchTransfers(this.startPage)
     }
   },
   mounted() {
-    this.fetchIncomes(this.startPage)
+    this.fetchTransfers(this.startPage)
   },
   methods: {
-    fetchIncomes(pageNumber) {
-      this.$store.dispatch(actionTypes.getIncomesList, {
+    fetchTransfers(pageNumber) {
+      this.$store.dispatch(actionTypes.getTransfersList, {
         pageNumber: pageNumber,
         sortBy: this.sortBy.value,
         search: this.search
       })
     },
-    clickIncome(incomeItem) {
-      if (incomeItem === this.editIncome && this.editForm === true) {
+    clickTransfer(transferItem) {
+      if (transferItem === this.editTransfer && this.editForm === true) {
         this.editForm = false
-      } else if (incomeItem != this.income && this.editForm === true) {
-        this.editIncome = incomeItem
+      } else if (transferItem != this.transfer && this.editForm === true) {
+        this.editTransfer = transferItem
       } else {
         this.editForm = !this.editForm
-        this.editIncome = incomeItem
+        this.editTransfer = transferItem
       }
       this.createForm = false
     },
-    deleteIncome(incomeId) {
+    deleteTransfer(transferId) {
       this.$store
-        .dispatch(editIncomeActionTypes.deleteIncome, {
-          slug: incomeId
+        .dispatch(editTransferActionTypes.deleteTransfer, {
+          slug: transferId
         })
         .then(() => {
-          this.fetchIncomes(this.startPage)
+          this.fetchTransfers(this.startPage)
           this.editForm = false
         })
     }

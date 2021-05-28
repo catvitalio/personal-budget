@@ -30,10 +30,6 @@ const getTagsList = () => {
   return axios.get('/income_tag/')
 }
 
-const createExpenseTag = tagInput => {
-  return axios.post('/income_tag/', tagInput).then(response => response.data)
-}
-
 export default {
   getIncome,
   deleteIncome,
@@ -41,6 +37,5 @@ export default {
   editIncome,
   getBudgetsList,
   getCategoriesList,
-  getTagsList,
-  createExpenseTag
+  getTagsList
 }
