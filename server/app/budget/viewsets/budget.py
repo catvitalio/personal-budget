@@ -173,8 +173,8 @@ class TransferViewSet(ModelViewSet):
     permission_classes = [TransferCreatorPermission]
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = [
-        'category__name',
-        'budget__name',
+        'budget_from__name',
+        'budget_to__name',
         'date',
         'value',
         'tags__name'
