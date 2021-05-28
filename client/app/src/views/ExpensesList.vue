@@ -1,24 +1,45 @@
 <template>
   <div class="page">
+    <transition name="slide">
+      <app-create-expense v-if="createForm" :show.sync="createForm" />
+      <app-edit-expense
+        v-if="editForm"
+        :show.sync="editForm"
+        :initialValues="editExpense"
+      />
+    </transition>
+    <transition name="slide">
+      <button
+        @click="createForm = !createForm"
+        v-if="createForm === false && editForm === false"
+        class="page-button"
+      >
+        +
+      </button>
+    </transition>
+    <div class="buttons-list">
+      <button>
+        <router-link :to="{name: 'expensesCategoriesList'}" exact
+          >Категории</router-link
+        >
+      </button>
+      <button>
+        <router-link :to="{name: 'expensesTagsList'}" exact>Теги</router-link>
+      </button>
+      <multiselect
+        class="sort-choice"
+        v-model="sortBy"
+        label="name"
+        :options="sortItemsList"
+        :searchable="false"
+        :show-labels="false"
+        track-by="value"
+        placeholder="Сортировка"
+      ></multiselect>
+    </div>
+    <input class="search-field" v-model="search" placeholder="Поиск" />
     <app-loading v-if="isLoading" />
     <div v-if="expenses">
-      <transition name="slide">
-        <app-create-expense v-if="createForm" :show.sync="createForm" />
-        <app-edit-expense
-          v-if="editForm"
-          :show.sync="editForm"
-          :initialValues="editExpense"
-        />
-      </transition>
-      <transition name="slide">
-        <button
-          @click="createForm = !createForm"
-          v-if="createForm === false && editForm === false"
-          class="page-button"
-        >
-          +
-        </button>
-      </transition>
       <div class="cards-list">
         <div v-for="expense in expenses" :key="expense">
           <div class="card">
@@ -55,6 +76,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import Multiselect from 'vue-multiselect'
 import {actionTypes} from '@/store/modules/expensesList'
 import {actionTypes as editExpenseActionTypes} from '@/store/modules/editExpense'
 import AppPagination from '@/components/Pagination'
@@ -68,14 +90,29 @@ export default {
     AppPagination,
     AppLoading,
     AppCreateExpense,
-    AppEditExpense
+    AppEditExpense,
+    Multiselect
   },
   data() {
     return {
       startPage: 1,
       createForm: false,
       editForm: false,
-      editExpense: null
+      editExpense: null,
+      sortBy: {name: 'По дате ↑', value: '-date'},
+      sortItemsList: [
+        {name: 'По дате ↑', value: '-date'},
+        {name: 'По дате ↓', value: 'date'},
+        {name: 'По категориям ↑', value: '-category'},
+        {name: 'По категориям ↓', value: 'category'},
+        {name: 'По счету ↑', value: '-budget'},
+        {name: 'По счету ↓', value: 'budget'},
+        {name: 'По значению ↑', value: '-value'},
+        {name: 'По значению ↓', value: 'value'},
+        {name: 'По тегам ↑', value: '-tags'},
+        {name: 'По тегам ↓', value: 'tags'}
+      ],
+      search: ''
     }
   },
   computed: {
@@ -94,6 +131,12 @@ export default {
     },
     editForm() {
       this.fetchExpenses(this.startPage)
+    },
+    sortBy() {
+      this.fetchExpenses(this.startPage)
+    },
+    search() {
+      this.fetchExpenses(this.startPage)
     }
   },
   mounted() {
@@ -101,7 +144,11 @@ export default {
   },
   methods: {
     fetchExpenses(pageNumber) {
-      this.$store.dispatch(actionTypes.getExpensesList, pageNumber)
+      this.$store.dispatch(actionTypes.getExpensesList, {
+        pageNumber: pageNumber,
+        sortBy: this.sortBy.value,
+        search: this.search
+      })
     },
     clickExpense(expenseItem) {
       if (expenseItem === this.editExpense && this.editForm === true) {

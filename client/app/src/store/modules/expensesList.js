@@ -31,11 +31,11 @@ const mutations = {
 }
 
 const actions = {
-  [actionTypes.getExpensesList](context, pageNumber) {
+  [actionTypes.getExpensesList](context, {pageNumber, sortBy, search}) {
     return new Promise(resolve => {
       context.commit(mutationTypes.getExpensesListStart)
       expensesListApi
-        .getExpensesList(pageNumber)
+        .getExpensesList(pageNumber, sortBy, search)
         .then(response => {
           context.commit(mutationTypes.getExpensesListSuccess, response.data)
           resolve(response.data)
