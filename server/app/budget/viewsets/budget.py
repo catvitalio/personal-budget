@@ -1,7 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.serializers import ValidationError
 from rest_framework.viewsets import ViewSet
-from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models import Q
 
 from budget.serializers import (
@@ -97,6 +96,14 @@ class ExpenseCategoryViewSet(ModelViewSet):
 
 class ExpenseViewSet(ModelViewSet):
     permission_classes = [BudgetCreatorPermission]
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = [
+        'category__name',
+        'budget__name',
+        'date',
+        'value',
+        'tags__name'
+    ]
 
     def get_queryset(self):
         return Expense.objects.filter(
@@ -132,6 +139,14 @@ class IncomeCategoryViewSet(ModelViewSet):
 
 class IncomeViewSet(ModelViewSet):
     permission_classes = [BudgetCreatorPermission]
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = [
+        'category__name',
+        'budget__name',
+        'date',
+        'value',
+        'tags__name'
+    ]
 
     def get_queryset(self):
         return Income.objects.filter(
@@ -156,6 +171,14 @@ class TransferTagViewSet(ModelViewSet):
 
 class TransferViewSet(ModelViewSet):
     permission_classes = [TransferCreatorPermission]
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = [
+        'category__name',
+        'budget__name',
+        'date',
+        'value',
+        'tags__name'
+    ]
 
     def get_queryset(self):
         return Transfer.objects.filter(
