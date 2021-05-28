@@ -189,7 +189,7 @@ export default {
         {
           label: 'Доходы',
           data: Object.values(this.incomesStats),
-          backgroundColor: getColors(Object.values(this.expensesStats))
+          backgroundColor: getColors(Object.values(this.incomesStats))
         }
       ]
       return {labels: labels, datasets: datasets}
