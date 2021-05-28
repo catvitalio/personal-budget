@@ -1,4 +1,4 @@
-import expenseApi from '@/api/expense'
+import incomeApi from '@/api/income'
 
 const state = {
   isSubmitting: false,
@@ -6,41 +6,41 @@ const state = {
 }
 
 export const mutationTypes = {
-  createExpenseStart: '[createExpense] Create expense start',
-  createExpenseSuccess: '[createExpense] Create expense success',
-  createExpenseFailure: '[createExpense] Create expense failure'
+  createIncomeStart: '[createIncome] Create income start',
+  createIncomeSuccess: '[createIncome] Create income success',
+  createIncomeFailure: '[createIncome] Create income failure'
 }
 
 export const actionTypes = {
-  createExpense: '[createExpense] Create expense'
+  createIncome: '[createIncome] Create income'
 }
 
 const mutations = {
-  [mutationTypes.createExpenseStart](state) {
+  [mutationTypes.createIncomeStart](state) {
     state.isSubmitting = true
   },
-  [mutationTypes.createExpenseSuccess](state) {
+  [mutationTypes.createIncomeSuccess](state) {
     state.isSubmitting = false
   },
-  [mutationTypes.createExpenseFailure](state, payload) {
+  [mutationTypes.createIncomeFailure](state, payload) {
     state.isSubmitting = false
     state.validationErrors = payload
   }
 }
 
 const actions = {
-  [actionTypes.createExpense](context, {expenseInput}) {
+  [actionTypes.createIncome](context, {incomeInput}) {
     return new Promise(resolve => {
-      context.commit(mutationTypes.createExpenseStart, expenseInput)
-      expenseApi
-        .createExpense(expenseInput)
-        .then(expense => {
-          context.commit(mutationTypes.createExpenseSuccess, expense.data)
-          resolve(expense.data)
+      context.commit(mutationTypes.createIncomeStart, incomeInput)
+      incomeApi
+        .createIncome(incomeInput)
+        .then(income => {
+          context.commit(mutationTypes.createIncomeSuccess, income.data)
+          resolve(income.data)
         })
         .catch(result => {
           context.commit(
-            mutationTypes.createExpenseFailure,
+            mutationTypes.createIncomeFailure,
             result.response.data
           )
         })
@@ -49,7 +49,7 @@ const actions = {
   [actionTypes.createExpenseTag](context, tagInput) {
     return new Promise(resolve => {
       context.commit(mutationTypes.createExpenseTagStart, tagInput)
-      expenseApi
+      incomeApi
         .createExpenseTag(tagInput)
         .then(tag => {
           context.commit(mutationTypes.createExpenseTagSuccess, tag.data)

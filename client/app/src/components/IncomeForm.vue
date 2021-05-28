@@ -72,15 +72,15 @@
 </template>
 
 <script>
-import expenseApi from '@/api/expense'
+import incomeApi from '@/api/income'
 import AppValidationErrors from '@/components/ValidationErrors'
-import {actionTypes} from '@/store/modules/createExpenseTag'
+import {actionTypes} from '@/store/modules/createIncomeTag'
 import Multiselect from 'vue-multiselect'
-import {getterTypes} from '@/store/modules/createExpenseTag'
+import {getterTypes} from '@/store/modules/createIncomeTag'
 import {mapGetters} from 'vuex'
 
 export default {
-  name: 'AppExpenseForm',
+  name: 'AppIncomeForm',
   components: {
     AppValidationErrors,
     Multiselect
@@ -118,10 +118,10 @@ export default {
     })
   },
   mounted() {
-    expenseApi.getBudgetsList().then(response => {
+    incomeApi.getBudgetsList().then(response => {
       this.budgetsList = response.data
     })
-    expenseApi.getCategoriesList().then(response => {
+    incomeApi.getCategoriesList().then(response => {
       this.categoriesList = response.data
     })
     this.fetchTags()
@@ -132,7 +132,7 @@ export default {
       const tag = {
         name: newTag
       }
-      this.$store.dispatch(actionTypes.createExpenseTag, tag).then(() => {
+      this.$store.dispatch(actionTypes.createIncomeTag, tag).then(() => {
         this.fetchTags()
         this.tags.push(this.tag)
       })
@@ -145,10 +145,10 @@ export default {
         category: this.category.id,
         tags: this.tags.map(obj => obj.id)
       }
-      this.$emit('expenseSubmit', form)
+      this.$emit('incomeSubmit', form)
     },
     fetchTags() {
-      expenseApi.getTagsList().then(response => {
+      incomeApi.getTagsList().then(response => {
         this.tagsList = response.data
       })
     },

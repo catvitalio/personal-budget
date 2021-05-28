@@ -4,6 +4,7 @@ import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
 import ExpensesList from '@/views/ExpensesList'
+import IncomesList from '@/views/IncomesList'
 
 Vue.use(VueRouter)
 
@@ -30,7 +31,8 @@ const routes = [
   },
   {
     path: '/incomes',
-    name: 'incomesList'
+    name: 'incomesList',
+    component: IncomesList
   },
   {
     path: '/sources',

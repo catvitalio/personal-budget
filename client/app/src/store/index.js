@@ -3,9 +3,13 @@ import Vuex from 'vuex'
 
 import auth from '@/store/modules/auth'
 import expensesList from '@/store/modules/expensesList'
+import incomesList from '@/store/modules/incomesList'
 import createExpense from '@/store/modules/createExpense'
+import createIncome from '@/store/modules/createIncome'
 import editExpense from '@/store/modules/editExpense'
-import createTag from '@/store/modules/createTag'
+import editIncome from '@/store/modules/editIncome'
+import createExpenseTag from '@/store/modules/createExpenseTag'
+import createIncomeTag from '@/store/modules/createIncomeTag'
 import expensesPeriodStats from '@/store/modules/expensesPeriodStats'
 import incomesPeriodStats from '@/store/modules/incomesPeriodStats'
 import expensesCategoriesStats from '@/store/modules/expensesCategoriesStats'
@@ -24,9 +28,13 @@ export default new Vuex.Store({
   modules: {
     auth,
     expensesList,
+    incomesList,
     createExpense,
+    createIncome,
     editExpense,
-    createTag,
+    editIncome,
+    createExpenseTag,
+    createIncomeTag,
     expensesPeriodStats,
     incomesPeriodStats,
     expensesCategoriesStats,
