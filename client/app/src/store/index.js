@@ -4,14 +4,17 @@ import Vuex from 'vuex'
 import auth from '@/store/modules/auth'
 import budgetsList from '@/store/modules/budgetsList'
 import expensesList from '@/store/modules/expensesList'
+import expensesCategoriesList from '@/store/modules/expensesCategoriesList'
 import incomesList from '@/store/modules/incomesList'
 import transfersList from '@/store/modules/transfersList'
 import createBudget from '@/store/modules/createBudget'
 import createExpense from '@/store/modules/createExpense'
+import createExpenseCategory from '@/store/modules/createExpenseCategory'
 import createIncome from '@/store/modules/createIncome'
 import createTransfer from '@/store/modules/createTransfer'
 import editBudget from '@/store/modules/editBudget'
 import editExpense from '@/store/modules/editExpense'
+import editExpenseCategory from '@/store/modules/editExpenseCategory'
 import editIncome from '@/store/modules/editIncome'
 import editTransfer from '@/store/modules/editTransfer'
 import createExpenseTag from '@/store/modules/createExpenseTag'
@@ -36,14 +39,17 @@ export default new Vuex.Store({
     auth,
     budgetsList,
     expensesList,
+    expensesCategoriesList,
     incomesList,
     transfersList,
     createBudget,
     createExpense,
+    createExpenseCategory,
     createIncome,
     createTransfer,
     editBudget,
     editExpense,
+    editExpenseCategory,
     editIncome,
     editTransfer,
     createExpenseTag,

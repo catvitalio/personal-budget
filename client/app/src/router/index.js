@@ -5,6 +5,7 @@ import Register from '@/views/Register'
 import Login from '@/views/Login'
 import BudgetsList from '@/views/BudgetsList'
 import ExpensesList from '@/views/ExpensesList'
+import ExpensesCategoriesList from '@/views/ExpensesCategoriesList'
 import IncomesList from '@/views/IncomesList'
 import TransfersList from '@/views/TransfersList'
 
@@ -30,6 +31,11 @@ const routes = [
     path: '/expenses',
     name: 'expensesList',
     component: ExpensesList
+  },
+  {
+    path: '/expenses-categories',
+    name: 'expensesCategoriesList',
+    component: ExpensesCategoriesList
   },
   {
     path: '/incomes',
