@@ -6,6 +6,7 @@ import Login from '@/views/Login'
 import BudgetsList from '@/views/BudgetsList'
 import ExpensesList from '@/views/ExpensesList'
 import ExpensesCategoriesList from '@/views/ExpensesCategoriesList'
+import ExpensesTagsList from '@/views/ExpensesTagsList'
 import IncomesList from '@/views/IncomesList'
 import TransfersList from '@/views/TransfersList'
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/expenses-categories',
     name: 'expensesCategoriesList',
     component: ExpensesCategoriesList
+  },
+  {
+    path: '/expenses-tags',
+    name: 'expensesTagsList',
+    component: ExpensesTagsList
   },
   {
     path: '/incomes',
