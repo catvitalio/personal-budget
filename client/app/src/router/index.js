@@ -16,47 +16,74 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      title: 'Personal Budget'
+    }
   },
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    meta: {
+      title: 'Регистрация'
+    }
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: {
+      title: 'Вход'
+    }
   },
   {
     path: '/expenses',
     name: 'expensesList',
-    component: ExpensesList
+    component: ExpensesList,
+    meta: {
+      title: 'Расходы'
+    }
   },
   {
     path: '/expenses-categories',
     name: 'expensesCategoriesList',
-    component: ExpensesCategoriesList
+    component: ExpensesCategoriesList,
+    meta: {
+      title: 'Категории'
+    }
   },
   {
     path: '/expenses-tags',
     name: 'expensesTagsList',
-    component: ExpensesTagsList
+    component: ExpensesTagsList,
+    meta: {
+      title: 'Теги'
+    }
   },
   {
     path: '/incomes',
     name: 'incomesList',
-    component: IncomesList
+    component: IncomesList,
+    meta: {
+      title: 'Доходы'
+    }
   },
   {
     path: '/budgets',
     name: 'budgetsList',
-    component: BudgetsList
+    component: BudgetsList,
+    meta: {
+      title: 'Счета'
+    }
   },
   {
     path: '/transfers',
     name: 'transfersList',
-    component: TransfersList
+    component: TransfersList,
+    meta: {
+      title: 'Переводы'
+    }
   }
 ]
 

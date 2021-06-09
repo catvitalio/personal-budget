@@ -18,7 +18,18 @@
       </button>
     </transition>
     <app-loading v-if="isLoading" />
+
     <div v-if="budgets">
+      <transition name="slide">
+        <div
+          v-if="createForm === false && editForm === false"
+          class="all-money card"
+        >
+          <h3>
+            Общий бюджет: <span>{{ allMoney }}</span>
+          </h3>
+        </div>
+      </transition>
       <div class="cards-list">
         <div v-for="budget in budgets" :key="budget">
           <div class="card">
@@ -63,7 +74,12 @@ export default {
     ...mapState({
       isLoading: state => state.budgetsList.isLoading,
       budgets: state => state.budgetsList.data,
-      error: state => state.budgetsList.error
+      error: state => state.budgetsList.error,
+      allMoney: state =>
+        state.budgetsList.data
+          .map(obj => Number(obj.value))
+          .reduce((a, b) => a + b)
+          .toFixed(2)
     })
   },
   watch: {
@@ -105,3 +121,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.all-money {
+  margin-top: 10px;
+  padding: 1px 5px 1px 1px;
+  text-align: center;
+  span {
+    font-weight: $--font-weight-normal;
+  }
+}
+</style>
