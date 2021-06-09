@@ -70,7 +70,7 @@ class Expense(models.Model):
     )
     budget = models.ForeignKey(
         Budget,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
     )
     date = models.DateField()
     tags = models.ManyToManyField(ExpenseTag, blank=True)
@@ -112,7 +112,7 @@ class Income(models.Model):
     )
     budget = models.ForeignKey(
         Budget,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
     )
     date = models.DateField()
     tags = models.ManyToManyField(IncomeTag, blank=True)
@@ -137,12 +137,12 @@ class Transfer(models.Model):
     )
     budget_from = models.ForeignKey(
         Budget,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
         related_name='transfer_from',
     )
     budget_to = models.ForeignKey(
         Budget,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
         related_name='transfer_to',
     )
     date = models.DateField()
