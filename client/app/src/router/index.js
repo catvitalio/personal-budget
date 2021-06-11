@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
+import Logout from '@/views/Logout'
 import BudgetsList from '@/views/BudgetsList'
 import ExpensesList from '@/views/ExpensesList'
 import ExpensesCategoriesList from '@/views/ExpensesCategoriesList'
@@ -36,6 +37,11 @@ const routes = [
     meta: {
       title: 'Вход'
     }
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: Logout
   },
   {
     path: '/expenses',

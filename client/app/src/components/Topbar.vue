@@ -42,8 +42,11 @@
         >
       </li>
       <li v-if="isLoggedIn">
-        <router-link class="nav-link" :to="{name: 'home'}">
-          {{ currentUser.username | truncate(7, '..') }}
+        <router-link :to="{name: 'logout'}">
+          <span class="username">{{
+            currentUser.username | truncate(7, '..')
+          }}</span
+          ><span class="exit">ВЫХОД</span>
         </router-link>
       </li>
     </ul>
@@ -75,13 +78,21 @@ nav {
   a {
     color: $--text;
     text-decoration: none;
-    transition: $--transition;
+    .exit {
+      display: none;
+    }
     .active {
       color: $--primary;
     }
     &:hover {
       color: $--secondary;
       transition: $--transition;
+      .username {
+        display: none;
+      }
+      .exit {
+        display: block;
+      }
     }
   }
 }
