@@ -21,7 +21,7 @@
 import AppValidationErrors from '@/components/ValidationErrors'
 
 export default {
-  name: 'AppExpenseTagForm',
+  name: 'AppIncomeTagForm',
   components: {
     AppValidationErrors
   },
@@ -49,7 +49,7 @@ export default {
       const form = {
         name: this.name
       }
-      this.$emit('expenseTagSubmit', form)
+      this.$emit('incomeTagSubmit', form)
     }
   }
 }

@@ -9,6 +9,8 @@ import ExpensesList from '@/views/ExpensesList'
 import ExpensesCategoriesList from '@/views/ExpensesCategoriesList'
 import ExpensesTagsList from '@/views/ExpensesTagsList'
 import IncomesList from '@/views/IncomesList'
+import IncomesCategoriesList from '@/views/IncomesCategoriesList'
+import IncomesTagsList from '@/views/IncomesTagsList'
 import TransfersList from '@/views/TransfersList'
 
 Vue.use(VueRouter)
@@ -73,6 +75,22 @@ const routes = [
     component: IncomesList,
     meta: {
       title: 'Доходы'
+    }
+  },
+  {
+    path: '/incomes-categories',
+    name: 'incomesCategoriesList',
+    component: IncomesCategoriesList,
+    meta: {
+      title: 'Категории'
+    }
+  },
+  {
+    path: '/incomes-tags',
+    name: 'incomesTagsList',
+    component: IncomesTagsList,
+    meta: {
+      title: 'Теги'
     }
   },
   {

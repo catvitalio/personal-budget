@@ -7,20 +7,25 @@ import expensesList from '@/store/modules/expensesList'
 import expensesCategoriesList from '@/store/modules/expensesCategoriesList'
 import expensesTagsList from '@/store/modules/expensesTagsList'
 import incomesList from '@/store/modules/incomesList'
+import incomesCategoriesList from '@/store/modules/incomesCategoriesList'
+import incomesTagsList from '@/store/modules/incomesTagsList'
 import transfersList from '@/store/modules/transfersList'
 import createBudget from '@/store/modules/createBudget'
 import createExpense from '@/store/modules/createExpense'
 import createExpenseCategory from '@/store/modules/createExpenseCategory'
 import createIncome from '@/store/modules/createIncome'
+import createIncomeCategory from '@/store/modules/createIncomeCategory'
 import createTransfer from '@/store/modules/createTransfer'
 import editBudget from '@/store/modules/editBudget'
 import editExpense from '@/store/modules/editExpense'
 import editExpenseCategory from '@/store/modules/editExpenseCategory'
 import editIncome from '@/store/modules/editIncome'
+import editIncomeCategory from '@/store/modules/editIncomeCategory'
 import editTransfer from '@/store/modules/editTransfer'
 import createExpenseTag from '@/store/modules/createExpenseTag'
 import editExpenseTag from '@/store/modules/editExpenseTag'
 import createIncomeTag from '@/store/modules/createIncomeTag'
+import editIncomeTag from '@/store/modules/editIncomeTag'
 import createTransferTag from '@/store/modules/createTransferTag'
 import expensesPeriodStats from '@/store/modules/expensesPeriodStats'
 import incomesPeriodStats from '@/store/modules/incomesPeriodStats'
@@ -44,20 +49,25 @@ export default new Vuex.Store({
     expensesCategoriesList,
     expensesTagsList,
     incomesList,
+    incomesCategoriesList,
+    incomesTagsList,
     transfersList,
     createBudget,
     createExpense,
     createExpenseCategory,
+    createIncomeCategory,
     createIncome,
     createTransfer,
     editBudget,
     editExpense,
     editExpenseCategory,
     editIncome,
+    editIncomeCategory,
     editTransfer,
     createExpenseTag,
     editExpenseTag,
     createIncomeTag,
+    editIncomeTag,
     createTransferTag,
     expensesPeriodStats,
     incomesPeriodStats,

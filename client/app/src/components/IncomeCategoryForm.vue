@@ -2,7 +2,7 @@
   <div class="page">
     <form @submit.prevent="onSubmit">
       <fieldset class="default-fieldset">
-        <input type="text" placeholder="Имя тега" v-model="name" />
+        <input type="text" placeholder="Имя категории" v-model="name" />
       </fieldset>
       <fieldset>
         <button type="submit" class="form-button" :disabled="isSubmitting">
@@ -21,7 +21,7 @@
 import AppValidationErrors from '@/components/ValidationErrors'
 
 export default {
-  name: 'AppExpenseTagForm',
+  name: 'AppIncomeCategoryForm',
   components: {
     AppValidationErrors
   },
@@ -49,7 +49,7 @@ export default {
       const form = {
         name: this.name
       }
-      this.$emit('expenseTagSubmit', form)
+      this.$emit('incomeCategorySubmit', form)
     }
   }
 }
