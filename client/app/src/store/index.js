@@ -10,6 +10,7 @@ import incomesList from '@/store/modules/incomesList'
 import incomesCategoriesList from '@/store/modules/incomesCategoriesList'
 import incomesTagsList from '@/store/modules/incomesTagsList'
 import transfersList from '@/store/modules/transfersList'
+import transfersTagsList from '@/store/modules/transfersTagsList'
 import createBudget from '@/store/modules/createBudget'
 import createExpense from '@/store/modules/createExpense'
 import createExpenseCategory from '@/store/modules/createExpenseCategory'
@@ -22,6 +23,7 @@ import editExpenseCategory from '@/store/modules/editExpenseCategory'
 import editIncome from '@/store/modules/editIncome'
 import editIncomeCategory from '@/store/modules/editIncomeCategory'
 import editTransfer from '@/store/modules/editTransfer'
+import editTransferTag from '@/store/modules/editTransferTag'
 import createExpenseTag from '@/store/modules/createExpenseTag'
 import editExpenseTag from '@/store/modules/editExpenseTag'
 import createIncomeTag from '@/store/modules/createIncomeTag'
@@ -52,6 +54,7 @@ export default new Vuex.Store({
     incomesCategoriesList,
     incomesTagsList,
     transfersList,
+    transfersTagsList,
     createBudget,
     createExpense,
     createExpenseCategory,
@@ -64,6 +67,7 @@ export default new Vuex.Store({
     editIncome,
     editIncomeCategory,
     editTransfer,
+    editTransferTag,
     createExpenseTag,
     editExpenseTag,
     createIncomeTag,

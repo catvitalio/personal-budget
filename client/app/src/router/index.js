@@ -12,6 +12,7 @@ import IncomesList from '@/views/IncomesList'
 import IncomesCategoriesList from '@/views/IncomesCategoriesList'
 import IncomesTagsList from '@/views/IncomesTagsList'
 import TransfersList from '@/views/TransfersList'
+import TransfersTagsList from '@/views/TransfersTagsList'
 
 Vue.use(VueRouter)
 
@@ -107,6 +108,14 @@ const routes = [
     component: TransfersList,
     meta: {
       title: 'Переводы'
+    }
+  },
+  {
+    path: '/transfers-tags',
+    name: 'transfersTagsList',
+    component: TransfersTagsList,
+    meta: {
+      title: 'Теги'
     }
   }
 ]
