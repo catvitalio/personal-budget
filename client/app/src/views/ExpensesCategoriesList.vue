@@ -23,7 +23,7 @@
         <div v-for="category in categories" :key="category">
           <div v-if="category.creator != null" class="card">
             <button @click="deleteExpenseCategory(category.id)">
-              ✕
+              ✖
             </button>
             <div class="content" @click="clickExpenseCategory(category)">
               <h1>{{ category.name }}</h1>

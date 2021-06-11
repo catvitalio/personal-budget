@@ -3,15 +3,15 @@
     <ul class="arrows-pagination">
       <li>
         <a href="#" @click="prevPage"
-          ><span class="pagination-item" :class="{active: hasPrevPage}"
-            >← сюда
+          ><span class="pagination-item" :class="{active: hasPrevPage}">
+            ⇐ сюда
           </span></a
         >
       </li>
       <li>
         <a href="#" @click="nextPage"
           ><span class="pagination-item" :class="{active: hasNextPage}">
-            туда →</span
+            туда ⇒</span
           ></a
         >
       </li>

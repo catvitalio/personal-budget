@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="exit-button" @click="changeShow()">✕</button>
+    <button class="exit-button" @click="changeShow()">✖</button>
     <app-expense-form
       :initial-values="initialValues"
       :errors="validationErrors"

@@ -18,9 +18,11 @@
       </button>
     </transition>
     <div class="buttons-list">
-      <button>
-        <router-link :to="{name: 'transfersTagsList'}" exact>Теги</router-link>
-      </button>
+      <router-link :to="{name: 'transfersTagsList'}" exact>
+        <button>
+          Теги
+        </button>
+      </router-link>
       <multiselect
         class="sort-choice"
         v-model="sortBy"
@@ -38,11 +40,11 @@
       <div class="cards-list">
         <div v-for="transfer in transfers" :key="transfer">
           <div class="card">
-            <button @click="deleteTransfer(transfer.id)">✕</button>
+            <button @click="deleteTransfer(transfer.id)">✖</button>
             <div class="content" @click="clickTransfer(transfer)">
               <h3>{{ transfer.date }}</h3>
               <h1>
-                {{ transfer.budget_from.name }} → {{ transfer.budget_to.name }}
+                {{ transfer.budget_from.name }} ⇒ {{ transfer.budget_to.name }}
               </h1>
               <p>
                 {{ transfer.value }}
@@ -95,8 +97,10 @@ export default {
       createForm: false,
       editForm: false,
       editTransfer: null,
-      sortBy: {name: 'По дате ↑', value: '-date'},
+      sortBy: {name: 'По дате добавления ↑', value: '-id'},
       sortItemsList: [
+        {name: 'По дате добавления ↑', value: '-id'},
+        {name: 'По дате добавления ↓', value: 'id'},
         {name: 'По дате ↑', value: '-date'},
         {name: 'По дате ↓', value: 'date'},
         {name: 'По источникам ↑', value: '-budget_from'},

@@ -18,14 +18,16 @@
       </button>
     </transition>
     <div class="buttons-list">
-      <button>
-        <router-link :to="{name: 'incomesCategoriesList'}" exact
-          >Категории</router-link
-        >
-      </button>
-      <button>
-        <router-link :to="{name: 'incomesTagsList'}" exact>Теги</router-link>
-      </button>
+      <router-link :to="{name: 'incomesCategoriesList'}" exact>
+        <button>
+          Категории
+        </button>
+      </router-link>
+      <router-link :to="{name: 'incomesTagsList'}" exact>
+        <button>
+          Теги
+        </button>
+      </router-link>
       <multiselect
         class="sort-choice"
         v-model="sortBy"
@@ -43,10 +45,10 @@
       <div class="cards-list">
         <div v-for="income in incomes" :key="income">
           <div class="card">
-            <button @click="deleteIncome(income.id)">✕</button>
+            <button @click="deleteIncome(income.id)">✖</button>
             <div class="content" @click="clickIncome(income)">
               <h3>{{ income.date }}</h3>
-              <h1>{{ income.category.name }} → {{ income.budget.name }}</h1>
+              <h1>{{ income.category.name }} ⇒ {{ income.budget.name }}</h1>
               <p>
                 {{ income.value }}
               </p>
@@ -98,8 +100,10 @@ export default {
       createForm: false,
       editForm: false,
       editIncome: null,
-      sortBy: {name: 'По дате ↑', value: '-date'},
+      sortBy: {name: 'По дате добавления ↑', value: '-id'},
       sortItemsList: [
+        {name: 'По дате добавления ↑', value: '-id'},
+        {name: 'По дате добавления ↓', value: 'id'},
         {name: 'По дате ↑', value: '-date'},
         {name: 'По дате ↓', value: 'date'},
         {name: 'По категориям ↑', value: '-category'},

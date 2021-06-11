@@ -17,9 +17,9 @@
         +
       </button>
     </transition>
-    <app-loading v-if="isLoading" />
 
     <div v-if="budgets">
+      <app-loading v-if="isLoading" />
       <transition name="slide">
         <div
           v-if="createForm === false && editForm === false"
@@ -33,7 +33,7 @@
       <div class="cards-list">
         <div v-for="budget in budgets" :key="budget">
           <div class="card">
-            <button @click="deleteBudget(budget.id)">✕</button>
+            <button @click="deleteBudget(budget.id)">✖</button>
             <div class="content" @click="clickBudget(budget)">
               <h3>{{ budget.budget_type.name }}</h3>
               <h1>{{ budget.name }}</h1>

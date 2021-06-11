@@ -23,7 +23,7 @@
         <div v-for="tag in tags" :key="tag">
           <div v-if="tag.creator != null" class="card">
             <button @click="deleteExpenseTag(tag.id)">
-              ✕
+              ✖
             </button>
             <div class="content" @click="clickExpenseTag(tag)">
               <h1>{{ tag.name }}</h1>

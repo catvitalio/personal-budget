@@ -4,13 +4,12 @@ body {
   font-family: $--font-family;
   font-size: $--font-size-base;
   font-weight: $--font-weight-normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  color: $--text;
   text-size-adjust: 100%;
 }
 
 .page {
+  font-family: $--font-family;
   width: 100%;
   max-width: 500px;
   margin: auto;
@@ -42,14 +41,11 @@ body {
     @extend .page-button;
     margin: 10px 5px 10px 0;
     padding: 0 10px 0 10px;
-    width: 200px;
+    width: 100px;
     background: $--tag;
+    font-family: $--font-family;
     font-size: $--font-size-base;
-    color: $--text;
-    font-weight: $--font-weight-bold;
-  }
-  a {
-    text-decoration: none;
+    font-weight: $--font-weight-medium;
     color: $--text;
   }
   .sort-choice {
@@ -80,6 +76,7 @@ body {
 }
 
 .card {
+  font-family: $--font-family;
   .active {
     background: black;
   }
@@ -106,7 +103,9 @@ body {
     position: absolute;
     margin-left: -8px;
     margin-top: -8px;
+    font-family: $--font-family;
     font-size: $--font-size-small;
+    font-weight: $--font-weight-normal;
     text-align: center;
     cursor: pointer;
     border-radius: 50%;
@@ -241,7 +240,9 @@ fieldset {
 }
 
 .exit-button {
-  font-size: $--font-size-subtitle;
+  font-family: $--font-family;
+  font-weight: $--font-weight-normal;
+  font-size: $--font-size-base;
   border: none;
   border-radius: 50%;
   width: 35px;
@@ -324,6 +325,10 @@ fieldset {
 .choice {
   display: inline;
   overflow: hidden;
+  font-family: $--font-family;
+  font-size: $--font-size-base;
+  font-weight: $--font-weight-medium;
+  color: $--text;
 
   .choice-item {
     display: inline-block;

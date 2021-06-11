@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="exit-button" @click="changeShow()">✕</button>
+    <button class="exit-button" @click="changeShow()">✖</button>
     <app-expense-category-form
       v-if="initialValues"
       :initial-values="initialValues"
